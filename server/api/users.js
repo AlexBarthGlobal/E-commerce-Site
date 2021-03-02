@@ -20,8 +20,8 @@ router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
     res.status(201).json(newUser)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
   }
 })
 
@@ -38,7 +38,17 @@ router.put('/:userId', async (req, res, next) => {
     }
     const [numUpdated, [updatedUser]] = updateUserInfo
     res.json(updatedUser)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    await user.destroy()
+    res.status(204).json(user)
+  } catch (err) {
+    next(err)
   }
 })
