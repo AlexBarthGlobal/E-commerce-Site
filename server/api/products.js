@@ -3,10 +3,9 @@ const {Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  console.log('requesting products!')
   try {
     const products = await Product.findAll({
-      attributes: ['name', 'description', 'picture']
+      attributes: ['name', 'description', 'picture', 'id']
     })
     res.json(products)
   } catch (err) {
