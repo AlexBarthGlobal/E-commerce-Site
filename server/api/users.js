@@ -37,7 +37,7 @@ router.put('/:userId', async (req, res, next) => {
       res.sendStatus(404)
     }
     const [numUpdated, [updatedUser]] = updateUserInfo
-    res.json(updatedUser)
+    res.status(201).json(updatedUser)
   } catch (err) {
     next(err)
   }

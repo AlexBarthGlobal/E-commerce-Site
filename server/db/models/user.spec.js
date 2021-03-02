@@ -28,6 +28,22 @@ describe('User model', () => {
       it('returns false if the password is incorrect', () => {
         expect(cody.correctPassword('bonez')).to.be.equal(false)
       })
-    }) // end describe('correctPassword')
+    })
+    describe('correctPassword', () => {
+      let cody
+
+      beforeEach(async () => {
+        cody = await User.create({
+          email: 'cody@puppybook.com',
+          address: '555 nice avenue',
+          password: 'bones'
+        })
+      })
+
+      it('returns true if userType is USER by default', () => {
+        expect(cody.userType.to.equal('USER'))
+      })
+    })
+    // end describe('correctPassword')
   }) // end describe('instanceMethods')
 }) // end describe('User model')

@@ -17,6 +17,7 @@ describe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
+        // id: 1,
         email: codysEmail,
         address: codysAddress
       })
@@ -30,5 +31,17 @@ describe('User routes', () => {
       expect(res.body).to.be.an('array')
       expect(res.body[0].email).to.be.equal(codysEmail)
     })
+
+    // it('PUT /api/users/1', async () => {
+    //   const res = await request(app)
+    //     .put('/api/users/1', {
+    //       email: 'codysSecondEmail@codysAddress.com',
+    //       password: 'codysPassword',
+    //     })
+    //     .expect(201)
+
+    //   expect(res.body).to.be.an('array')
+    //   expect(res.body[0].email).to.be.equal('codysSecondEmail@codysAddress.com')
+    // })
   }) // end describe('/api/users')
 }) // end describe('User routes')
