@@ -8,21 +8,26 @@ describe('Product model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
-
-  describe('instanceMethods', () => {
-    describe('correctName', () => {
-      let fruit
-
-      beforeEach(async () => {
-        fruit = await Product.create({
-          name: 'Apple',
-          description: 'a red shiny tasty crispy apple',
-          picture:
-            'https://www.applesfromny.com/wp-content/uploads/2020/05/Jonagold_NYAS-Apples2.png',
-          price: 0.39,
-          quantity: 6
+  describe('Product Model Creation', function(done) {
+    var modelData = {
+      name: 'apple',
+      description: 'red bright shiny crispy fruit',
+      picture: 'photo',
+      price: 0.39,
+      quantity: 4
+    }
+    
+    it(`should create a new Model`, function() {
+      Product.create(modelData).then(function(product) {
+        expect(product.name).to.equal('apple')
+        expect(product.price).to.equal(0.39)
+        Product.destroy({
+          where: {
+            id: product.id
+          }
         })
+        done()
       })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
+    })
+  })
 }) // end describe('User model')
