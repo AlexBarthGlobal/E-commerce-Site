@@ -3,9 +3,10 @@ const {Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
+  console.log('requesting products!')
   try {
     const products = await Product.findAll({
-      attributes: ['id', 'email']
+      attributes: ['name', 'description', 'picture']
     })
     res.json(products)
   } catch (err) {
@@ -22,19 +23,21 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+//TODO: Post route for adding new product
+/* router.post('/', async (req, res, next) => {
   try {
     const {name, imageUrl, address, description} = req.body
-    const newCampus = await Campus.create({
+    const newProduct = await Product.create({
       name,
       imageUrl,
       address,
-      description
+      description,
     })
-    res.status(201).send(newCampus)
+    res.status(201).send(newProduct)
   } catch (err) {
     next(err)
   }
 })
+ */
 
 module.exports = router
