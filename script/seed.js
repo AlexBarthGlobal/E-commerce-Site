@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 const {User, Product} = require('../server/db/models')
-const seedProducts = require('../seedProducts')
+const seedProducts = require('../seed-products')
 
 async function seed() {
   await db.sync({force: true})
@@ -13,10 +13,10 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
-  const products = await Promise.all(Product.bulkCreate(seedProducts))
+  const products = await Product.bulkCreate(seedProducts)
 
   console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${products.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
