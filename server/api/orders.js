@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, ProductsInCart} = require('../db/models')
+const {Order, ProductsInCart, Product} = require('../db/models')
 module.exports = router
 
 //update quantity
@@ -77,6 +77,9 @@ router.get('/users/:userId/cart', async (req, res, next) => {
       where: {
         status: 'incomplete',
         userId: req.params.userId
+      },
+      include: {
+        model: Product
       }
     })
     res.json(incompleteOrder)
