@@ -40,11 +40,14 @@ export const fetchCart = userId => async dispatch => {
 export const _addToCart = (product, userId, cartId) => async dispatch => {
   try {
     const {price, productId} = product
-    const addedProduct = await axios.post(
+    const res = await axios.post(
       `api/orders/users/${userId}/cart/${cartId}/add`,
       {price, productId}
     )
-    dispatch(addToCart(addedProduct.data))
+    //this is to normalize data with how we recieve it from sequelize on the get cart call.
+    const addedProduct = product
+    addedProduct.ProductsInCart = res.data
+    dispatch(addToCart(addedProduct))
   } catch (err) {
     console.log(err)
   }
@@ -57,29 +60,26 @@ export default function(state = cartState, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      /*
-      if product, increase quatity
-      else add product
-      */
-      const productExists = state.products.filter(curProduct => {
-        return curProduct.id === action.product.id
-      })
-      if (productExists) {
-        const updatedProducts = state.products.map(curProduct => {
-          if (curProduct.id === action.product.id) {
-            curProduct = action.product
-          }
-          return curProduct
+      if (state.products) {
+        const productExists = state.products.filter(curProduct => {
+          return curProduct.id === action.product.id
         })
-        return {
-          ...state,
-          products: updatedProducts
+        if (productExists) {
+          const updatedProducts = state.products.map(curProduct => {
+            if (curProduct.id === action.product.id) {
+              curProduct = action.product
+            }
+            return curProduct
+          })
+          return {
+            ...state,
+            products: updatedProducts
+          }
         }
-      } else {
-        return {
-          ...state,
-          products: [...state.products, action.product]
-        }
+      }
+      return {
+        ...state,
+        products: [action.product]
       }
 
     default:

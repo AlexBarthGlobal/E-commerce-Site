@@ -79,10 +79,13 @@ router.get('/users/:userId/cart', async (req, res, next) => {
         userId: req.params.userId
       },
       include: {
-        model: Product
+        model: Product,
+        through: {
+          attributes: ProductsInCart
+        }
       }
     })
-    res.json(incompleteOrder)
+    res.json(incompleteOrder[0])
   } catch (err) {
     next(err)
   }
