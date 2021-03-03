@@ -16,7 +16,6 @@ describe('Product model', () => {
       price: 0.39,
       quantity: 4
     }
-    
     it(`should create a new Model`, function() {
       Product.create(modelData).then(function(product) {
         expect(product.name).to.equal('apple')
