@@ -1,27 +1,30 @@
 language: node_js
 node_js:
-  - 14 # uses version 14
+  - 14
 services:
-  - postgresql # starts up postgres
+  - postgresql
 addons:
-  postgresql: '10' # recent postgres version on Travis
-dist: xenial # uses xenial environment
+  postgresql: '10'
+dist: xenial
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+  - npm ci
 before_script:
-  - psql -c 'create database "pits-protectors-graceshopper";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "pits-protectors-graceshopper";' -U postgres
 script:
-  - npm test # test the code
-  - npm run build-client # make the bundle
+  - npm test
+  - npm run build-client
+deploy:
+  api_key:
+    secure:
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
 #   skip_cleanup: true # prevents travis from deleting the build
 #   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
+#   app: pits-protectors-graceshopper
 #   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+#     secure: KJTflgFOr12OHu6M+eqGPeFDTa7mNWFDoLETUazvzTzT5Oduw/CswrHHZLJl5RjbujIRBBtKI9f8LohgZuhtqJYG2bSdAxKVMWp/8eOIyAqyq+QzbgRCUecmeZz9knjRk/XbqtYNYFbwQLLRLpJWFMRKjM3qAP43kWN7bex3rpu+/h+d6NCjHSdjfW7ngWYS/c/qnfIfT/dGD5yJrDEzKfP0hhbwvtDxlgn79aOjQA95BYo2M/kYuYHix2Pz7n2IwhFYJ5wH35T5XAEbiDfwIBFlt9WX3LH0dPVO0ywzXN9T2ETu7psQmFyeO4at1+DBBH+1FBWFF1J7Lx+9p3q6CiSYNqvy6LghLvOo905fR/4OAclTDmwRLGy18uq10e226cSPtIP+rHjlqPcyNk5P+qD2fqlhOgH+C9ga6l6xX4PXVeAPo/if3jwRhQzsQgIN0N41zqBxRgIUOmO3eJGRXc8wQZLVrnR6M9Bje5Ho6c6rqWq837dyengxUoUhho8HOw3Z65Xzm94OnOVlsBR9YYguyZR1FWZYTCVH7yexq6lyDHqGgpAXqqibeuURl/7n5D9HRqWqOw4+4Yzmw0UQRu485YlK4cla24HHwAeQDR7+Lmu/hqzJyIbd1zkE5BvJEgt4nd8OmCBtkaJWWMbNMuNfWw/jhJ4jHwKRE2D7WsI=
