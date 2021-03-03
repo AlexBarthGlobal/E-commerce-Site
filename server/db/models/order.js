@@ -2,10 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  products: {
-    type: Sequelize.ARRAY,
-    allowNull: true
-  },
   status: {
     type: Sequelize.ENUM('incomplete', 'submitted'),
     allowNull: false,

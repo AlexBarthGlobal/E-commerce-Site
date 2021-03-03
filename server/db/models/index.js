@@ -2,13 +2,14 @@ const User = require('./user')
 const Product = require('./product')
 const Order = require('./order')
 const Sequelize = require('sequelize')
+const db = require('../db')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
-const SoldProducts = Sequelize.define('SoldProducts', {
+const ProductsInCart = db.define('ProductsInCart', {
   productPrice: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -20,8 +21,8 @@ const SoldProducts = Sequelize.define('SoldProducts', {
 })
 Order.belongsTo(User)
 User.hasMany(Order)
-Order.hasMany(Product, {through: SoldProducts})
-Product.belongsToMany(Order)
+Order.belongsToMany(Product, {through: ProductsInCart})
+Product.belongsToMany(Order, {through: ProductsInCart})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -33,5 +34,5 @@ module.exports = {
   User,
   Product,
   Order,
-  SoldProducts
+  ProductsInCart
 }
