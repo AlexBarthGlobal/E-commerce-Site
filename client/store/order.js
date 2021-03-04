@@ -38,11 +38,12 @@ export const fetchCart = userId => async dispatch => {
 }
 
 export const _addToCart = (product, userId, cartId) => async dispatch => {
+  console.log(product)
   try {
-    const {price, productId} = product
+    const {price, id} = product
     const res = await axios.post(
-      `api/orders/users/${userId}/cart/${cartId}/add`,
-      {price, productId}
+      `/api/orders/users/${userId}/cart/${cartId}/add`,
+      {price, id}
     )
     //this is to normalize data with how we recieve it from sequelize on the get cart call.
     const addedProduct = product
@@ -60,14 +61,30 @@ export default function(state = cartState, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      if (state.products) {
+      console.log()
+      if (state.products.length > 0) {
+        console.log('state.products exists, is not empty')
         const productExists = state.products.filter(curProduct => {
           return curProduct.id === action.product.id
         })
-        if (productExists) {
+        console.log(
+          '🚀 ~ file: order.js ~ line 70 ~ productExists ~ productExists',
+          productExists
+        )
+
+        if (productExists.length > 0) {
+          console.log('product exists in cart, adding quantity')
           const updatedProducts = state.products.map(curProduct => {
+            console.log(
+              '🚀 ~ file: order.js ~ line 72 ~ updatedProducts ~ curProduct',
+              curProduct
+            )
             if (curProduct.id === action.product.id) {
               curProduct = action.product
+              console.log(
+                '🚀 ~ file: order.js ~ line 75 ~ updatedProducts ~ curProduct',
+                curProduct
+              )
             }
             return curProduct
           })

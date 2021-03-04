@@ -39,14 +39,13 @@ router.delete('/users/:userId/cart/:cartId/delete', async (req, res, next) => {
 
 //add to cart
 router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
-  console.log(req.body)
-  const {productId, price} = req.body
+  const {id, price} = req.body
   const orderId = req.params.cartId
   try {
     const addedProduct = await ProductsInCart.findOne({
       where: {
         orderId: orderId,
-        productId: productId
+        productId: id
       }
     })
     let updatedProduct
@@ -59,7 +58,7 @@ router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
     } else {
       updatedProduct = await ProductsInCart.create({
         orderId: orderId,
-        productId: productId,
+        productId: id,
         productPrice: price,
         quantity: 1
       })
