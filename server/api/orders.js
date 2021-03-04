@@ -71,20 +71,27 @@ router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
 })
 
 router.get('/users/:userId/cart', async (req, res, next) => {
+  console.log(
+    '🚀 ~ file: orders.js ~ line 74 ~ router.get ~ req',
+    req.params.userId
+  )
   try {
     const incompleteOrder = await Order.findOrCreate({
       where: {
         status: 'incomplete',
         userId: req.params.userId
-      },
-      include: {
-        model: Product,
-        through: {
-          attributes: ProductsInCart
-        }
       }
     })
-    res.json(incompleteOrder[0])
+    if (!incompleteOrder[1]) {
+      const cartProducts = await ProductsInCart.findAll({
+        where: {
+          orderId: incompleteOrder[0].id
+        }
+      })
+      res.json({orderInfo: incompleteOrder[0], cartProducts: cartProducts})
+    } else {
+      res.json({orderInfo: incompleteOrder[0], cartProducts: []})
+    }
   } catch (err) {
     next(err)
   }

@@ -1,6 +1,8 @@
 const User = require('./user')
 const Product = require('./product')
 const Order = require('./order')
+const Address = require('./address')
+const Payment = require('./payment')
 const Sequelize = require('sequelize')
 const db = require('../db')
 /**
@@ -21,6 +23,13 @@ const ProductsInCart = db.define('ProductsInCart', {
 })
 Order.belongsTo(User)
 User.hasMany(Order)
+
+Address.belongsTo(User)
+User.hasOne(Address)
+
+Order.belongsTo(Payment)
+Payment.hasMany(Order)
+
 Order.belongsToMany(Product, {through: ProductsInCart})
 Product.belongsToMany(Order, {through: ProductsInCart})
 
@@ -34,5 +43,7 @@ module.exports = {
   User,
   Product,
   Order,
-  ProductsInCart
+  ProductsInCart,
+  Address,
+  Payment
 }

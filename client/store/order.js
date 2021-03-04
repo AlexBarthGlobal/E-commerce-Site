@@ -2,7 +2,8 @@ import axios from 'axios'
 import history from '../history'
 
 const cartState = {
-  products: []
+  orderInfo: {},
+  cartProducts: []
 }
 
 //action types
@@ -12,10 +13,11 @@ const ADD_TO_CART = 'ADD_TO_CART'
 
 //action creators
 
-const getCart = cart => {
+const getCart = (orderInfo, cartProducts) => {
   return {
     type: GET_CART,
-    cart
+    orderInfo,
+    cartProducts
   }
 }
 
@@ -31,62 +33,63 @@ const addToCart = product => {
 export const fetchCart = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/orders/users/${userId}/cart`)
-    dispatch(getCart(res.data))
+    const orderInfo = res.data.orderInfo
+    const cartProducts = res.data.cartProducts
+    dispatch(getCart(orderInfo, cartProducts))
   } catch (err) {
     console.log(err)
   }
 }
 
 export const _addToCart = (product, userId, cartId) => async dispatch => {
-  console.log(product)
   try {
     const {price, id} = product
     const res = await axios.post(
       `/api/orders/users/${userId}/cart/${cartId}/add`,
       {price, id}
     )
-    //this is to normalize data with how we recieve it from sequelize on the get cart call.
-    const addedProduct = product
-    addedProduct.ProductsInCart = res.data
-    dispatch(addToCart(addedProduct))
+    dispatch(addToCart(res.data))
   } catch (err) {
     console.log(err)
   }
 }
 
-//reducer
+const handleAddToCartState = (state, action) => {
+  if (state.cartProducts.length === 0) {
+    //add item to empty cart
+    return [action.product]
+  }
+  //check if product already exists in cart
+  const filteredCart = state.cartProducts.filter(
+    prod => prod.productId === action.product.productId
+  )
+  if (filteredCart.length === 0) {
+    return [...state.cartProducts, action.product]
+  }
+  //update item in cart
+  const updatedProducts = state.cartProducts.map(prod => {
+    if (prod.productId === action.product.productId) {
+      return action.product
+    }
+    return prod
+  })
+  return updatedProducts
+}
+//if item doesn't exist, add to items in cart
 
 export default function(state = cartState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.cart
-    /* currently this is not handling any new products in the cart correctly -
-    they are going to the case on line 90 in which the whole array is overwritten. furthermore, existing products are still not updating properly with the quantity. TBD why.
-    */
-    case ADD_TO_CART:
-      if (state.products.length > 0) {
-        const productExists = state.products.filter(curProduct => {
-          return curProduct.id === action.product.id
-        })
-
-        if (productExists.length > 0) {
-          const updatedProducts = state.products.map(curProduct => {
-            if (curProduct.id === action.product.id) {
-              curProduct = action.product
-            }
-            return curProduct
-          })
-          return {
-            ...state,
-            products: updatedProducts
-          }
-        }
+      return {
+        orderInfo: action.orderInfo,
+        cartProducts: action.cartProducts
       }
+    case ADD_TO_CART:
+      const newCartProducts = handleAddToCartState(state, action)
       return {
         ...state,
-        products: [...state.products, action.product]
+        cartProducts: newCartProducts
       }
-
     default:
       return state
   }
