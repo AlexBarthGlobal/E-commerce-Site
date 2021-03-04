@@ -84,7 +84,7 @@ export default function(state = cartState, action) {
       }
       return {
         ...state,
-        products: [action.product]
+        products: [...state.products, action.product]
       }
 
     default:
