@@ -4,6 +4,7 @@ import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 
 export class SingleProduct extends React.Component {
   componentDidMount() {
+    console.log('mounting, here are the props', this.props)
     this.props.fetchProductDetails(this.props.match.params.productId)
     this.props.fetchCart(this.props.userId)
   }
@@ -39,10 +40,11 @@ export class SingleProduct extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state)
   return {
     currentProduct: state.product.currentProduct,
     userId: state.user.id,
-    cart: state.order
+    cart: state.order.orderInfo
   }
 }
 
