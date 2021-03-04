@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProductDetails} from '../store'
+import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 
 export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
+    this.props.fetchCart(this.props.userId)
   }
 
   render() {
@@ -15,7 +16,18 @@ export class SingleProduct extends React.Component {
         <div id="single-product" key={product.id}>
           <h2>{product.name}</h2>
           <p>{product.price}</p>
-          <button type="submit">Add To Cart</button>
+          <button
+            onClick={() =>
+              this.props.addToCart(
+                product,
+                this.props.userId,
+                this.props.cart.id
+              )
+            }
+            type="submit"
+          >
+            Add To Cart
+          </button>
           <p>{product.description}</p>
         </div>
       </React.Fragment>
@@ -28,13 +40,18 @@ export class SingleProduct extends React.Component {
  */
 const mapState = state => {
   return {
-    currentProduct: state.product.currentProduct
+    currentProduct: state.product.currentProduct,
+    userId: state.user.id,
+    cart: state.order
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchProductDetails: id => dispatch(fetchProductDetails(id))
+    fetchProductDetails: id => dispatch(fetchProductDetails(id)),
+    fetchCart: userId => dispatch(fetchCart(userId)),
+    addToCart: (product, userId, cartId) =>
+      dispatch(_addToCart(product, userId, cartId))
   }
 }
 
