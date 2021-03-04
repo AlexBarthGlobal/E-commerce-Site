@@ -60,31 +60,19 @@ export default function(state = cartState, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart
+    /* currently this is not handling any new products in the cart correctly -
+    they are going to the case on line 90 in which the whole array is overwritten. furthermore, existing products are still not updating properly with the quantity. TBD why.
+    */
     case ADD_TO_CART:
-      console.log()
       if (state.products.length > 0) {
-        console.log('state.products exists, is not empty')
         const productExists = state.products.filter(curProduct => {
           return curProduct.id === action.product.id
         })
-        console.log(
-          '🚀 ~ file: order.js ~ line 70 ~ productExists ~ productExists',
-          productExists
-        )
 
         if (productExists.length > 0) {
-          console.log('product exists in cart, adding quantity')
           const updatedProducts = state.products.map(curProduct => {
-            console.log(
-              '🚀 ~ file: order.js ~ line 72 ~ updatedProducts ~ curProduct',
-              curProduct
-            )
             if (curProduct.id === action.product.id) {
               curProduct = action.product
-              console.log(
-                '🚀 ~ file: order.js ~ line 75 ~ updatedProducts ~ curProduct',
-                curProduct
-              )
             }
             return curProduct
           })
