@@ -3,12 +3,41 @@ import {connect} from 'react-redux'
 import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 
 export class SingleProduct extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+    this.addToLoggedOutCart = this.addToLoggedOutCart.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
     this.props.fetchCart(this.props.userId)
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    if (cart) {
+      this.setState({
+        cart: cart
+      })
+    }
+  }
+
+  addToLoggedOutCart(product) {
+    if (this.state.cart.includes(product)) {
+      product.quantity += 1
+    } else {
+      product.quantity = 1
+      this.setState(prevState => ({
+        cart: [...prevState.cart, product]
+      }))
+    }
+    const {cart} = this.state
+    if (cart) localStorage.setItem('cart', JSON.stringify(cart))
+    console.log('cart', cart)
   }
 
   render() {
+    // console.log(this.props.userId)
     const product = this.props.currentProduct
     return (
       <React.Fragment>
@@ -18,11 +47,13 @@ export class SingleProduct extends React.Component {
           <p>{product.price}</p>
           <button
             onClick={() =>
-              this.props.addToCart(
-                product,
-                this.props.userId,
-                this.props.cart.id
-              )
+              this.props.userId
+                ? this.props.addToCart(
+                    product,
+                    this.props.userId,
+                    this.props.cart.id
+                  )
+                : this.addToLoggedOutCart(product)
             }
             type="submit"
           >

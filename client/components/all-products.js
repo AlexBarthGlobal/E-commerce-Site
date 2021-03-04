@@ -8,8 +8,21 @@ import {fetchProducts} from '../store'
  */
 
 export class AllProducts extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+  }
   componentDidMount() {
     this.props.fetchProducts()
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    if (cart) {
+      this.setState({
+        cart: cart
+      })
+    }
+    console.log('cart', cart)
   }
 
   render() {
@@ -38,7 +51,6 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     allProducts: state.product.allProducts
   }
