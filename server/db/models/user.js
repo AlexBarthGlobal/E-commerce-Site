@@ -72,6 +72,10 @@ User.encryptPassword = function(plainText, salt) {
     .digest('hex')
 }
 
+User.isAdmin = function(user) {
+  return user.userType === 'ADMIN'
+}
+
 /**
  * hooks
  */
