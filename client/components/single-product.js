@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProductDetails, _addToCart, fetchCart} from '../store'
+import {_setCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
   componentDidMount() {
@@ -19,11 +20,13 @@ export class SingleProduct extends React.Component {
           <p>{product.price}</p>
           <button
             onClick={() =>
-              this.props.addToCart(
-                product,
-                this.props.userId,
-                this.props.cart.id
-              )
+              this.props.userId
+                ? this.props.addToCart(
+                    product,
+                    this.props.userId,
+                    this.props.cart.id
+                  )
+                : this.props.addToLocalCart(product)
             }
             type="submit"
           >
@@ -40,7 +43,6 @@ export class SingleProduct extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     currentProduct: state.product.currentProduct,
     userId: state.user.id,
@@ -53,7 +55,8 @@ const mapDispatch = dispatch => {
     fetchProductDetails: id => dispatch(fetchProductDetails(id)),
     fetchCart: userId => dispatch(fetchCart(userId)),
     addToCart: (product, userId, cartId) =>
-      dispatch(_addToCart(product, userId, cartId))
+      dispatch(_addToCart(product, userId, cartId)),
+    addToLocalCart: item => dispatch(_setCart(item))
   }
 }
 
