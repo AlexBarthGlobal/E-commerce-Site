@@ -2,8 +2,16 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 module.exports = router
 
+/* const checkAdmin = async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err)
+  }
+} */
+
 router.get('/', async (req, res, next) => {
   try {
+    console.log('req session', req.session)
     const products = await Product.findAll({
       attributes: ['name', 'description', 'picture', 'id']
     })

@@ -121,7 +121,8 @@ export class Checkout extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    cart: state.order
+    orderInfo: state.order.orderInfo,
+    orderItems: state.order.cartProducts
   }
 }
 
