@@ -41,7 +41,7 @@ export const fetchCart = userId => async dispatch => {
   }
 }
 
-export const _addToCart = (product, userId, cartId) => async dispatch => {
+export const _addToCart = (product, cartId) => async dispatch => {
   try {
     const {price, id} = product
     const res = await axios.post(`/api/orders/${cartId}/add`, {price, id})

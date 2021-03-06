@@ -52,8 +52,7 @@ const mapDispatch = dispatch => {
   return {
     fetchProductDetails: id => dispatch(fetchProductDetails(id)),
     fetchCart: userId => dispatch(fetchCart(userId)),
-    addToCart: (product, userId, cartId) =>
-      dispatch(_addToCart(product, userId, cartId))
+    addToCart: (product, cartId) => dispatch(_addToCart(product, cartId))
   }
 }
 
