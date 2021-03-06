@@ -18,7 +18,7 @@ describe('Product routes', () => {
         'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
       picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
       price: 4.63,
-      quantity: 48
+      stock: 48
     }
 
     const newProductTwo = {
@@ -27,7 +27,7 @@ describe('Product routes', () => {
         'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
       picture: 'http://dummyimage.com/201x148.bmp/cc0000/ffffff',
       price: 47.21,
-      quantity: 62
+      stock: 62
     }
 
     beforeEach(async () => {
@@ -52,7 +52,7 @@ describe('Product routes', () => {
         'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
       picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
       price: 4.63,
-      quantity: 48
+      stock: 48
     }
 
     beforeEach(() => {
@@ -65,7 +65,7 @@ describe('Product routes', () => {
         .expect(200)
       expect(res.body).to.be.an('object')
       expect(res.body).to.be.equal(newProductOne)
-      expect(res.body.quantity).to.be.equal(newProductOne.quantity)
+      expect(res.body.stock).to.be.equal(newProductOne.stock)
     })
   }) // end describe('/api/users')
 }) // end describe('User routes')

@@ -18,7 +18,7 @@ describe('SingleProduct', () => {
         'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
       picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
       price: 4.63,
-      quantity: 48
+      stock: 48
     }
   ]
   beforeEach(() => {

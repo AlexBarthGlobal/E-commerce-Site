@@ -19,8 +19,21 @@ const ProductsInCart = db.define('ProductsInCart', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  picture: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  stock: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 })
+
 Order.belongsTo(User)
 User.hasMany(Order)
 

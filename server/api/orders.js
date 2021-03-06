@@ -39,7 +39,7 @@ router.delete('/users/:userId/cart/:cartId/delete', async (req, res, next) => {
 
 //add to cart
 router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
-  const {id, price} = req.body
+  const {id, price, name, picture, stock} = req.body
   const orderId = req.params.cartId
   try {
     const addedProduct = await ProductsInCart.findOne({
@@ -60,7 +60,10 @@ router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
         orderId: orderId,
         productId: id,
         productPrice: price,
-        quantity: 1
+        quantity: 1,
+        name: name,
+        picture: picture,
+        stock: stock
       })
     }
 

@@ -43,10 +43,10 @@ export const fetchCart = userId => async dispatch => {
 
 export const _addToCart = (product, userId, cartId) => async dispatch => {
   try {
-    const {price, id} = product
+    const {price, id, name, picture, stock} = product
     const res = await axios.post(
       `/api/orders/users/${userId}/cart/${cartId}/add`,
-      {price, id}
+      {price, id, name, picture, stock}
     )
     dispatch(addToCart(res.data))
   } catch (err) {
