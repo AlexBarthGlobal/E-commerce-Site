@@ -38,10 +38,14 @@ describe('User model', () => {
           address: '555 nice avenue',
           password: 'bones'
         })
+        console.log(
+          '🚀 ~ file: user.spec.js ~ line 41 ~ beforeEach ~ cody',
+          cody
+        )
       })
 
       it('returns true if userType is USER by default', () => {
-        expect(cody.userType.to.equal('USER'))
+        expect(cody.userType).to.equal('USER')
       })
     })
     // end describe('correctPassword')

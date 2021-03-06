@@ -38,6 +38,10 @@ describe('SingleProduct', () => {
   })
 
   it('renders the name in an h2', () => {
+    console.log(
+      '🚀 ~ file: single-product.spec.js ~ line 31 ~ beforeEach ~ singleProduct',
+      singleProduct
+    )
     expect(singleProduct.find('h2').text()).to.be.equal('W201')
   })
 })

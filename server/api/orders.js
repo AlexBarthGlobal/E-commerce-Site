@@ -71,10 +71,6 @@ router.post('/:cartId/add', async (req, res, next) => {
 
 //checkout a cart
 router.put('/:cartId/checkout', async (req, res, next) => {
-  console.log(
-    '🚀 ~ file: orders.js ~ line 74 ~ router.put ~ req',
-    req.params.cartId
-  )
   try {
     const {address, user, payment} = req.body
     const paymentMethod = await Payment.create(payment)
