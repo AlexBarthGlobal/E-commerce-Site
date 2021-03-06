@@ -1,4 +1,0 @@
-diff a/server/db/models/address.js b/server/db/models/address.js	(rejected hunks)
-@@ -10 +10 @@ const Address = db.define('address', {
--  zipcode: Sequelize.STRING,
-+  zipcode: Sequelize.STRING

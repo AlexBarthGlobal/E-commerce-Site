@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, ProductsInCart, Product} = require('../db/models')
+const {Order, ProductsInCart, Payment} = require('../db/models')
 module.exports = router
 
 //update quantity
@@ -66,6 +66,29 @@ router.post('/:cartId/add', async (req, res, next) => {
     res.json(updatedProduct)
   } catch (err) {
     console.log(err)
+  }
+})
+
+//checkout a cart
+router.put('/:cartId/checkout', async (req, res, next) => {
+  console.log(
+    '🚀 ~ file: orders.js ~ line 74 ~ router.put ~ req',
+    req.params.cartId
+  )
+  try {
+    const {address, user, payment} = req.body
+    const paymentMethod = await Payment.create(payment)
+    const currentOrder = await Order.findByPk(req.params.cartId)
+    res.send(
+      await currentOrder.update({
+        status: 'submitted',
+        ...user,
+        ...address,
+        paymentId: paymentMethod.id
+      })
+    )
+  } catch (err) {
+    next(err)
   }
 })
 

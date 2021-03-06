@@ -5,8 +5,8 @@ const Payment = db.define('payment', {
   type: {
     type: Sequelize.ENUM('credit')
   },
-  ccnumber: {
-    type: Sequelize.INTEGER
+  ccNumber: {
+    type: Sequelize.STRING
   },
   cvv: {
     type: Sequelize.INTEGER
@@ -15,7 +15,7 @@ const Payment = db.define('payment', {
     type: Sequelize.STRING
   },
   zipcode: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   }
 })
 

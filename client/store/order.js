@@ -10,6 +10,7 @@ const cartState = {
 
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+const CHECKOUT_CART = 'CHECKOUT_CART'
 
 //action creators
 
@@ -25,6 +26,13 @@ const addToCart = product => {
   return {
     type: ADD_TO_CART,
     product
+  }
+}
+
+const checkoutCart = completedOrder => {
+  return {
+    type: CHECKOUT_CART,
+    completedOrder
   }
 }
 
@@ -48,6 +56,24 @@ export const _addToCart = (product, cartId) => async dispatch => {
     dispatch(addToCart(res.data))
   } catch (err) {
     console.log(err)
+  }
+}
+
+export const _checkoutCart = (
+  cartId,
+  user,
+  address,
+  payment
+) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/orders/${cartId}/checkout`, {
+      user,
+      address,
+      payment
+    })
+    dispatch(checkoutCart(res.data))
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -86,6 +112,12 @@ export default function(state = cartState, action) {
       return {
         ...state,
         cartProducts: newCartProducts
+      }
+    case CHECKOUT_CART:
+      return {
+        ...state,
+        orderInfo: action.completedOrder,
+        cartProducts: []
       }
     default:
       return state
