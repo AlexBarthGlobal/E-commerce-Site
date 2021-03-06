@@ -40,11 +40,19 @@ const Order = db.define(
     Sequelize,
     validate: {
       checkCompleteOrderForSubmission() {
+        const requiredValues = [
+          this.name,
+          this.phoneNumber,
+          this.email,
+          this.addressLine1,
+          this.addressLine2,
+          this.city,
+          this.state,
+          this.zipcode
+        ]
         if (this.status === 'submitted') {
-          for (const property in this) {
-            if (this[property] === null) {
-              throw new Error('All fields must be filled out to submit order')
-            }
+          if (requiredValues.includes(null)) {
+            throw new Error('All fields must be filled out to submit order')
           }
         }
       }

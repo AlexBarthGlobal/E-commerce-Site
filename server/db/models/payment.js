@@ -50,8 +50,8 @@ Payment.encryptCcNumber = function(plainText, salt) {
 const setSaltAndCcNumber = payment => {
   if (payment.changed('ccNumber')) {
     payment.salt = Payment.generateSalt()
-    payment.ccNumber = Payment.encryptPassword(
-      payment.password(),
+    payment.ccNumber = Payment.encryptCcNumber(
+      payment.ccNumber(),
       payment.salt()
     )
   }

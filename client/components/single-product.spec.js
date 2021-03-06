@@ -11,6 +11,11 @@ enzyme.configure({adapter})
 
 describe('SingleProduct', () => {
   let singleProduct
+  let matchParams = {
+    params: {
+      productId: 1
+    }
+  }
   const sampleProduct = [
     {
       name: 'W201',
@@ -22,7 +27,14 @@ describe('SingleProduct', () => {
     }
   ]
   beforeEach(() => {
-    singleProduct = shallow(<SingleProduct product={sampleProduct} />)
+    singleProduct = shallow(
+      <SingleProduct
+        currentProduct={sampleProduct}
+        match={matchParams}
+        fetchProductDetails={params => null}
+        fetchCart={() => null}
+      />
+    )
   })
 
   it('renders the name in an h2', () => {

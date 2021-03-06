@@ -8,7 +8,7 @@ describe('Order model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
-  describe('Product Model Creation', function(done) {
+  describe('Order Model Creation', function(done) {
     var completedOrder = {
       status: 'submitted',
       submittedTime: 1615046444,
@@ -55,7 +55,7 @@ describe('Order model', () => {
             id: order.id
           }
         })
-        done()
+        //done()
       })
     })
     it(`should create a new Model for incomplete orders`, function() {
@@ -67,18 +67,17 @@ describe('Order model', () => {
             id: order.id
           }
         })
-        done()
+        //done()
       })
     })
     it(`should fail to create a submitted order if information is missing`, function() {
       Order.create(failedOrder).then(function(order) {
-        expect(order).to.equal('All fields must be filled out to submit order')
+        expect(order).to.throw(Error)
         Order.destroy({
           where: {
             id: order.id
           }
         })
-        done()
       })
     })
   })

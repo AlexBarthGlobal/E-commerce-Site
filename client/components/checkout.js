@@ -66,7 +66,7 @@ export class Checkout extends React.Component {
     const payment = {
       ccNumber: this.state.ccNumber,
       cvv: this.state.cvv,
-      billingZipcode: this.state.billingZipcode,
+      zipcode: this.state.billingZipcode,
       nameOnCard: this.state.nameOnCard
     }
     const cartId = this.props.orderInfo.id
@@ -170,7 +170,7 @@ export class Checkout extends React.Component {
             <label htmlFor={email}>
               State:
               <input
-                name="name"
+                name="state"
                 type="text"
                 value={state}
                 onChange={this.handleChange}
