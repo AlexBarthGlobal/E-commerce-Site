@@ -8,18 +8,22 @@ const Payment = db.define('payment', {
   },
   ccNumber: {
     type: Sequelize.STRING,
+    allowNull: false,
     get() {
       return () => this.getDataValue('ccNumber')
     }
   },
   cvv: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   nameOnCard: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   zipcode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   salt: {
     type: Sequelize.STRING,
