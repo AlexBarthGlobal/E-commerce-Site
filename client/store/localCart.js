@@ -1,5 +1,5 @@
 const cartState = {
-  cart: []
+  cart: JSON.parse(localStorage.getItem('cart') || '[]')
 }
 
 //action type
@@ -27,7 +27,7 @@ const getCart = cart => {
 export function _setCart(item) {
   return dispatch => {
     try {
-      cartState.cart = JSON.parse(localStorage.getItem('cart') || '[]')
+      item.quantity = 1
       cartState.cart.push(item)
       let localCart = JSON.stringify(cartState.cart)
       localStorage.setItem('cart', localCart)
