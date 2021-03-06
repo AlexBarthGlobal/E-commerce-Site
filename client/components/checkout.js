@@ -1,25 +1,46 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {} from '../store'
+import {_checkoutCart, fetchCart} from '../store'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       user: this.props.user,
-      payment: {}
+      payment: {
+        ccNumber: '',
+        cvv: '',
+        zipcode: '',
+        nameOnCard: ''
+      },
+      orderInfo: this.props.orderInfo
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {}
 
-  handleChange(event) {}
+  handleChange(event) {
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
 
-  handleSubmit(event) {}
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit(event) {
+    this.props.checkoutCart(
+      this.state.user,
+      this.state.payment,
+      this.state.orderInfo
+    )
+  }
 
   render() {
     const {name, address, phoneNumber, email} = this.state.user
+
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -94,7 +115,7 @@ export class Checkout extends React.Component {
             <label>
               CVV:
               <input
-                type="text"
+                type="number"
                 value={this.state.cvv}
                 onChange={this.handleChange}
               />
@@ -102,7 +123,7 @@ export class Checkout extends React.Component {
             <label>
               Zip Code:
               <input
-                type="text"
+                type="number"
                 value={this.state.zipcode}
                 onChange={this.handleChange}
               />
@@ -128,7 +149,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    checkoutCart: (user, payment) => {}
+    fetchCart: userId => dispatch(fetchCart(userId)),
+    checkoutCart: (user, payment, orderInfo) =>
+      dispatch(_checkoutCart(user, payment, orderInfo))
   }
 }
 

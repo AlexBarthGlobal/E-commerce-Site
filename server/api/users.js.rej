@@ -1,0 +1,16 @@
+diff a/server/api/users.js b/server/api/users.js	(rejected hunks)
+@@ -13,2 +13,2 @@ router.get('/:id', async (req, res, next) => {
+-        model: Address,
+-      },
++        model: Address
++      }
+@@ -30,2 +30,2 @@ router.get('/', async (req, res, next) => {
+-        model: Address,
+-      },
++        model: Address
++      }
+@@ -53,2 +53,2 @@ router.put('/:userId', async (req, res, next) => {
+-        id: req.params.userId,
+-      },
++        id: req.params.userId
++      }

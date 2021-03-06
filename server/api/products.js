@@ -2,18 +2,10 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 module.exports = router
 
-/* const checkAdmin = async (req, res, next) => {
-  try {
-  } catch (err) {
-    next(err)
-  }
-} */
-
 router.get('/', async (req, res, next) => {
   try {
-    console.log('req session', req.session)
     const products = await Product.findAll({
-      attributes: ['name', 'description', 'picture', 'id']
+      attributes: ['name', 'description', 'picture', 'id', 'price']
     })
     res.json(products)
   } catch (err) {
@@ -29,22 +21,5 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
-
-//TODO: Post route for adding new product
-/* router.post('/', async (req, res, next) => {
-  try {
-    const {name, imageUrl, address, description} = req.body
-    const newProduct = await Product.create({
-      name,
-      imageUrl,
-      address,
-      description,
-    })
-    res.status(201).send(newProduct)
-  } catch (err) {
-    next(err)
-  }
-})
- */
 
 module.exports = router
