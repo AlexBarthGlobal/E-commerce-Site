@@ -2,6 +2,8 @@ const cartState = {
   cart: JSON.parse(localStorage.getItem('cart') || '[]')
 }
 
+//still need to add delete item from cart type,creator, and thunk. Might be easier once I have access to the cart page itself in order to make sure the button is operational.
+
 //action type
 
 const SET_CART = 'SET_CART'
