@@ -91,7 +91,26 @@ export class Checkout extends React.Component {
 
     return (
       <React.Fragment>
+        <div id="order-details">
+          <h3>Cart</h3>
+          {this.props.orderItems ? (
+            this.props.orderItems.map(product => {
+              return (
+                <div id="product-details" key={product.id}>
+                  <p>Product Name: {product.name}</p>
+                  <p>Price: ${product.productPrice / 100}</p>
+                  <p>Quantity: {product.quantity}</p>
+                </div>
+              )
+            })
+          ) : (
+            <p>No products in cart!</p>
+          )}
+          <h3>Total Cost</h3>
+          <p>{this.props.orderInfo.totalValue}</p>
+        </div>
         <form onSubmit={this.handleSubmit}>
+          <h3>Recipient Info</h3>
           <label htmlFor="name">
             Name:
             <input
@@ -168,6 +187,7 @@ export class Checkout extends React.Component {
             </label>
           </div>
           <div className="billingInfo">
+            <h3>Payment Details</h3>
             <label htmlFor={nameOnCard}>
               Name on Card:
               <input
