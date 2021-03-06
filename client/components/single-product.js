@@ -11,7 +11,7 @@ export class SingleProduct extends React.Component {
 
   render() {
     const product = this.props.currentProduct
-    console.log(product)
+    // console.log(product)
     return (
       <React.Fragment>
         <img src={product.picture} />
@@ -41,7 +41,6 @@ export class SingleProduct extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     currentProduct: state.product.currentProduct,
     userId: state.user.id,
