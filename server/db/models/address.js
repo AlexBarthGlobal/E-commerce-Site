@@ -7,7 +7,7 @@ const Address = db.define('address', {
   line2: Sequelize.STRING,
   city: Sequelize.STRING,
   state: Sequelize.STRING,
-  zip: Sequelize.STRING
+  zipcode: Sequelize.STRING
 })
 
 module.exports = Address
