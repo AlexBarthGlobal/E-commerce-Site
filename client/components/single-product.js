@@ -1,17 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProductDetails, _addToCart, fetchCart} from '../store'
-import {_setCart} from '../store/localCart'
+import {_setCart, _getCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
   componentDidMount() {
-    console.log('mounting, here are the props', this.props)
     this.props.fetchProductDetails(this.props.match.params.productId)
-    this.props.fetchCart(this.props.userId)
+
+    this.props.userId
+      ? this.props.fetchCart(this.props.userId)
+      : this.props.getLocalCart()
   }
 
   render() {
     const product = this.props.currentProduct
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    console.log('cart', cart)
     return (
       <React.Fragment>
         <img src={product.picture} />
@@ -56,7 +60,8 @@ const mapDispatch = dispatch => {
     fetchCart: userId => dispatch(fetchCart(userId)),
     addToCart: (product, userId, cartId) =>
       dispatch(_addToCart(product, userId, cartId)),
-    addToLocalCart: item => dispatch(_setCart(item))
+    addToLocalCart: item => dispatch(_setCart(item)),
+    getLocalCart: () => dispatch(_getCart())
   }
 }
 

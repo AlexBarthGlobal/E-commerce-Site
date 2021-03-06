@@ -24,12 +24,13 @@ const getCart = cart => {
 }
 
 //thunk
-
 export function _setCart(item) {
   return dispatch => {
     try {
-      localStorage.setItem('cart', JSON.stringify(item))
-      console.log('item', item)
+      cartState.cart = JSON.parse(localStorage.getItem('cart') || '[]')
+      cartState.cart.push(item)
+      let localCart = JSON.stringify(cartState.cart)
+      localStorage.setItem('cart', localCart)
       dispatch(setCart(item))
     } catch (err) {
       console.log(err)
@@ -56,7 +57,9 @@ export default function(state = cartState, action) {
         cart: [...state.cart, action.item]
       }
     case GET_CART:
-      return action.cart
+      return {
+        cart: action.cart
+      }
     default:
       return state
   }
