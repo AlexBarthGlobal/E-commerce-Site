@@ -18,13 +18,7 @@ export class SingleProduct extends React.Component {
           <h2>{product.name}</h2>
           <p>{product.price}</p>
           <button
-            onClick={() =>
-              this.props.addToCart(
-                product,
-                this.props.userId,
-                this.props.cart.id
-              )
-            }
+            onClick={() => this.props.addToCart(product, this.props.cart.id)}
             type="submit"
           >
             Add To Cart
