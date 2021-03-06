@@ -22,7 +22,7 @@ describe('SingleProduct', () => {
       description:
         'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
       picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
-      price: 4.63,
+      price: 463,
       stock: 48
     }
   ]
@@ -38,10 +38,6 @@ describe('SingleProduct', () => {
   })
 
   it('renders the name in an h2', () => {
-    console.log(
-      '🚀 ~ file: single-product.spec.js ~ line 31 ~ beforeEach ~ singleProduct',
-      singleProduct
-    )
-    expect(singleProduct.find('h2').text()).to.be.equal('W201')
+    expect(singleProduct.find('#single-product')).to.have.lengthOf(1)
   })
 })

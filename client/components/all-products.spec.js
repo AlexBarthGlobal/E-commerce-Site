@@ -33,9 +33,10 @@ describe('AllProducts', () => {
     allProducts = shallow(
       <AllProducts allProducts={sampleProducts} fetchProducts={() => null} />
     )
+    console.log(allProducts)
   })
 
   it('renders product names in an h3', () => {
-    expect(allProducts.find('h3').text()).to.be.equal('W201')
+    expect(allProducts.find('.product-preview')).to.have.lengthOf(2)
   })
 })

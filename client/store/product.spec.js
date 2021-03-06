@@ -47,7 +47,7 @@ describe('thunk creators', () => {
           stock: 58
         }
       ]
-      mockAxios.onGet('/api/products/').replyOnce(200, fakeProducts)
+      mockAxios.onGet('/api/products').replyOnce(200, fakeProducts)
       await store.dispatch(fetchProducts())
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_PRODUCTS')
