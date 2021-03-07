@@ -70,12 +70,9 @@ export const _addToCart = (product, userId, cartId) => async dispatch => {
   }
 }
 
-export const _updateCart = (quantity, cartId, userId) => async dispatch => {
+export const _updateCart = (quantity, cartId) => async dispatch => {
   try {
-    const res = await axios.put(
-      `/api/orders/users/${userId}/cart/${cartId}/update`,
-      quantity
-    )
+    const res = await axios.put(`/api/orders/${cartId}/update`, quantity)
     console.log(res.data)
     dispatch(updateCart(res.data))
   } catch (err) {
@@ -83,11 +80,9 @@ export const _updateCart = (quantity, cartId, userId) => async dispatch => {
   }
 }
 
-export const _removeItem = (cartId, userId) => async dispatch => {
+export const _removeItem = cartId => async dispatch => {
   try {
-    const res = await axios.delete(
-      `/api/orders/users/${userId}/cart/${cartId}/delete`
-    )
+    const res = await axios.delete(`/api/orders/${cartId}/delete`)
     dispatch(removeItem(res.data))
   } catch (error) {
     console.log(error)
@@ -132,6 +127,10 @@ export default function(state = cartState, action) {
       }
     case UPDATE_CART:
       return action.product
+    case REMOVE_ITEM:
+      return state.cartProducts.filter(
+        product => product.productId !== action.product.productId
+      )
     default:
       return state
   }
