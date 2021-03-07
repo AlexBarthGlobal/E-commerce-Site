@@ -45,7 +45,12 @@ const User = db.define('user', {
   },
   phoneNumber: {
     type: Sequelize.STRING
-  }
+  },
+  addressLine1: Sequelize.STRING,
+  addressLine2: Sequelize.STRING,
+  city: Sequelize.STRING,
+  state: Sequelize.STRING,
+  zipcode: Sequelize.STRING
 })
 
 module.exports = User

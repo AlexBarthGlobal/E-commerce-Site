@@ -36,7 +36,6 @@ export class SingleProduct extends React.Component {
               this.props.userId
                 ? this.props.addToCart(
                     product,
-                    this.props.userId,
                     this.props.cart.id
                   )
                 : this.props.addToLocalCart(product)
@@ -67,8 +66,8 @@ const mapDispatch = dispatch => {
   return {
     fetchProductDetails: id => dispatch(fetchProductDetails(id)),
     fetchCart: userId => dispatch(fetchCart(userId)),
-    addToCart: (product, userId, cartId) =>
-      dispatch(_addToCart(product, userId, cartId)),
+    addToCart: (product, cartId) =>
+      dispatch(_addToCart(product, cartId)),
     addToLocalCart: item => dispatch(_setCart(item)),
     getLocalCart: () => dispatch(_getCart())
   }
