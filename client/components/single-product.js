@@ -4,14 +4,6 @@ import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 import {_setCart, _getCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      cart: []
-    }
-    this.addToLoggedOutCart = this.addToLoggedOutCart.bind(this)
-  }
-
   componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
 
@@ -34,10 +26,7 @@ export class SingleProduct extends React.Component {
           <button
             onClick={() =>
               this.props.userId
-                ? this.props.addToCart(
-                    product,
-                    this.props.cart.id
-                  )
+                ? this.props.addToCart(product, this.props.cart.id)
                 : this.props.addToLocalCart(product)
             }
             type="submit"
@@ -66,8 +55,7 @@ const mapDispatch = dispatch => {
   return {
     fetchProductDetails: id => dispatch(fetchProductDetails(id)),
     fetchCart: userId => dispatch(fetchCart(userId)),
-    addToCart: (product, cartId) =>
-      dispatch(_addToCart(product, cartId)),
+    addToCart: (product, cartId) => dispatch(_addToCart(product, cartId)),
     addToLocalCart: item => dispatch(_setCart(item)),
     getLocalCart: () => dispatch(_getCart())
   }

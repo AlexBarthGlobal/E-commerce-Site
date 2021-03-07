@@ -31,7 +31,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/all-products" component={AllProducts} />
         <Route
-          path="/product/:productId"
+          path="/products/:productId"
           render={routeProps => <SingleProduct {...routeProps} />}
         />
         <Route path="/checkout" component={Checkout} />
