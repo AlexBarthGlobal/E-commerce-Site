@@ -22,7 +22,7 @@ export class AllProducts extends React.Component {
           {this.props.allProducts.map(product => {
             return (
               <div className="product-preview" key={product.id}>
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/products/${product.id}`}>
                   <img src={product.picture} />
                   <h3>{product.name}</h3>
                   <p>{product.price}</p>
@@ -40,6 +40,7 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state)
   return {
     allProducts: state.product.allProducts
   }
