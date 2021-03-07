@@ -14,7 +14,7 @@ describe('Product model', () => {
       description: 'red bright shiny crispy fruit',
       picture: 'photo',
       price: 0.39,
-      quantity: 4
+      stock: 4
     }
     it(`should create a new Model`, function() {
       Product.create(modelData).then(function(product) {

@@ -41,7 +41,7 @@ describe('User model', () => {
       })
 
       it('returns true if userType is USER by default', () => {
-        expect(cody.userType.to.equal('USER'))
+        expect(cody.userType).to.equal('USER')
       })
     })
     // end describe('correctPassword')

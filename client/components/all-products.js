@@ -38,7 +38,6 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     allProducts: state.product.allProducts
   }
