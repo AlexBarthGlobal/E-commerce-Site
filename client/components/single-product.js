@@ -4,6 +4,14 @@ import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 import {_setCart, _getCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+    this.addToLoggedOutCart = this.addToLoggedOutCart.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
 
@@ -13,6 +21,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    // console.log(this.props.userId)
     const product = this.props.currentProduct
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
     console.log('cart', cart)
