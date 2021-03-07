@@ -14,7 +14,9 @@ router.put('/users/:userId/cart/:cartId/update', async (req, res, next) => {
       }
     })
 
-    res.send(await updatedProduct.update({quantity: quantity}))
+    console.log(updatedProduct)
+
+    res.send(await updatedProduct.update(quantity))
   } catch (err) {
     console.log(err)
   }
@@ -71,10 +73,6 @@ router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
 })
 
 router.get('/users/:userId/cart', async (req, res, next) => {
-  console.log(
-    '🚀 ~ file: orders.js ~ line 74 ~ router.get ~ req',
-    req.params.userId
-  )
   try {
     const incompleteOrder = await Order.findOrCreate({
       where: {

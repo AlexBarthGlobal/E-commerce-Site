@@ -10,6 +10,8 @@ const cartState = {
 
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+const UPDATE_CART = 'UPDATE_CART'
+const REMOVE_ITEM = 'REMOVE_ITEM'
 
 //action creators
 
@@ -24,6 +26,20 @@ const getCart = (orderInfo, cartProducts) => {
 const addToCart = product => {
   return {
     type: ADD_TO_CART,
+    product
+  }
+}
+
+const updateCart = product => {
+  return {
+    type: UPDATE_CART,
+    product
+  }
+}
+
+const removeItem = product => {
+  return {
+    type: REMOVE_ITEM,
     product
   }
 }
@@ -51,6 +67,30 @@ export const _addToCart = (product, userId, cartId) => async dispatch => {
     dispatch(addToCart(res.data))
   } catch (err) {
     console.log(err)
+  }
+}
+
+export const _updateCart = (quantity, cartId, userId) => async dispatch => {
+  try {
+    const res = await axios.put(
+      `/api/orders/users/${userId}/cart/${cartId}/update`,
+      quantity
+    )
+    console.log(res.data)
+    dispatch(updateCart(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const _removeItem = (cartId, userId) => async dispatch => {
+  try {
+    const res = await axios.delete(
+      `/api/orders/users/${userId}/cart/${cartId}/delete`
+    )
+    dispatch(removeItem(res.data))
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -90,6 +130,8 @@ export default function(state = cartState, action) {
         ...state,
         cartProducts: newCartProducts
       }
+    case UPDATE_CART:
+      return action.product
     default:
       return state
   }
