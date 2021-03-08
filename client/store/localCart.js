@@ -5,7 +5,7 @@ const cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 //action type
 
 const SET_CART = 'SET_CART'
-const GET_CART = 'GET_CART'
+const GET_LOCAL_CART = 'GET_LOCAL_CART'
 
 //action creator
 
@@ -18,7 +18,7 @@ const setCart = item => {
 
 const getCart = cart => {
   return {
-    type: GET_CART,
+    type: GET_LOCAL_CART,
     cart
   }
 }
@@ -57,7 +57,7 @@ export default function(state = cartState, action) {
         action.item
         // cart: [...state.cart, action.item]
       ]
-    case GET_CART:
+    case GET_LOCAL_CART:
       return action.cart
     default:
       return state
