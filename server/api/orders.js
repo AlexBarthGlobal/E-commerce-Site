@@ -104,6 +104,38 @@ router.put('/:cartId/checkout', async (req, res, next) => {
   }
 })
 
+//guest checkout
+router.post('/checkout', async (req, res, next) => {
+  try {
+    const {address, user, payment, cart} = req.body
+    console.log(
+      '🚀 ~ file: orders.js ~ line 111 ~ router.post ~ cartProducts',
+      cart
+    )
+    const paymentMethod = await Payment.create(payment)
+    const newOrder = await Order.create({
+      status: 'submitted',
+      ...user,
+      ...address,
+      paymentId: paymentMethod.id
+    })
+    const updatedProducts = cart.map(product => {
+      return {
+        orderId: newOrder.id,
+        productId: product.id,
+        productPrice: product.price,
+        quantity: product.quantity,
+        name: product.name,
+        picture: product.picture
+      }
+    })
+    await ProductsInCart.bulkCreate(updatedProducts)
+    res.send(newOrder)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //search for an incomplete cart and create one if it doesn't exist
 router.get('/users/:userId/', async (req, res, next) => {
   try {
