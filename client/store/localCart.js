@@ -64,7 +64,6 @@ export const _checkoutLocalCart = (
 ) => async dispatch => {
   try {
     const cart = JSON.parse(localStorage.getItem('cart'))
-    console.log('🚀 ~ file: localCart.js ~ line 65 ~ cart', cart)
     const res = await axios.post(`/api/orders/checkout`, {
       user,
       address,
