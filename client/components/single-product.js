@@ -22,7 +22,6 @@ export class SingleProduct extends React.Component {
     // console.log(this.props.userId)
     const product = this.props.currentProduct
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-    console.log('cart', cart)
     return (
       <React.Fragment>
         <img src={product.picture} />

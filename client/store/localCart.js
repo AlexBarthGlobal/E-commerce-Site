@@ -1,6 +1,4 @@
-const cartState = {
-  cart: JSON.parse(localStorage.getItem('cart') || '[]')
-}
+const cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
 //still need to add delete item from cart type,creator, and thunk. Might be easier once I have access to the cart page itself in order to make sure the button is operational.
 
@@ -30,8 +28,8 @@ export function _setCart(item) {
   return dispatch => {
     try {
       item.quantity = 1
-      cartState.cart.push(item)
-      let localCart = JSON.stringify(cartState.cart)
+      cartState.push(item)
+      let localCart = JSON.stringify(cartState)
       localStorage.setItem('cart', localCart)
       dispatch(setCart(item))
     } catch (err) {
@@ -54,14 +52,13 @@ export const _getCart = () => dispatch => {
 export default function(state = cartState, action) {
   switch (action.type) {
     case SET_CART:
-      return {
+      return [
         ...state,
-        cart: [...state.cart, action.item]
-      }
+        action.item
+        // cart: [...state.cart, action.item]
+      ]
     case GET_CART:
-      return {
-        cart: action.cart
-      }
+      return action.cart
     default:
       return state
   }
