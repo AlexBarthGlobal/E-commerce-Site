@@ -36,7 +36,7 @@ describe('thunk creators', () => {
             'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
           picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
           price: 4.63,
-          quantity: 48
+          stock: 48
         },
         {
           name: '9-3',
@@ -44,10 +44,10 @@ describe('thunk creators', () => {
             'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
           picture: 'http://dummyimage.com/118x202.jpg/cc0000/ffffff',
           price: 58.85,
-          quantity: 58
+          stock: 58
         }
       ]
-      mockAxios.onGet('/api/products/').replyOnce(200, fakeProducts)
+      mockAxios.onGet('/api/products').replyOnce(200, fakeProducts)
       await store.dispatch(fetchProducts())
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_PRODUCTS')
@@ -64,7 +64,7 @@ describe('thunk creators', () => {
             'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
           picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
           price: 4.63,
-          quantity: 48
+          stock: 48
         },
         {
           name: '9-3',
@@ -72,7 +72,7 @@ describe('thunk creators', () => {
             'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
           picture: 'http://dummyimage.com/118x202.jpg/cc0000/ffffff',
           price: 58.85,
-          quantity: 58
+          stock: 58
         }
       ]
       mockAxios.onGet('/api/products/1').replyOnce(200, fakeProducts[0])

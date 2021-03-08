@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
+import {_getCart} from '../store/localCart'
 
 /**
  * COMPONENT
@@ -10,6 +11,7 @@ import {fetchProducts} from '../store'
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
+    this.props.getLocalCart()
   }
 
   render() {
@@ -38,7 +40,6 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     allProducts: state.product.allProducts
   }
@@ -46,7 +47,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    getLocalCart: () => dispatch(_getCart())
   }
 }
 

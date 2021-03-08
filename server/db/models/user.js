@@ -18,10 +18,6 @@ const User = db.define('user', {
     allowNull: false
   },
 
-  address: {
-    type: Sequelize.STRING
-  },
-
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
@@ -42,7 +38,19 @@ const User = db.define('user', {
 
   googleId: {
     type: Sequelize.STRING
-  }
+  },
+
+  name: {
+    type: Sequelize.STRING
+  },
+  phoneNumber: {
+    type: Sequelize.STRING
+  },
+  addressLine1: Sequelize.STRING,
+  addressLine2: Sequelize.STRING,
+  city: Sequelize.STRING,
+  state: Sequelize.STRING,
+  zipcode: Sequelize.STRING
 })
 
 module.exports = User
