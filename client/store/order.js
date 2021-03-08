@@ -16,7 +16,6 @@ const REMOVE_ITEM = 'REMOVE_ITEM'
 
 const CHECKOUT_CART = 'CHECKOUT_CART'
 
-
 //action creators
 
 const getCart = (orderInfo, cartProducts) => {
@@ -33,7 +32,6 @@ const addToCart = product => {
     product
   }
 }
-
 
 const updateCart = product => {
   return {
@@ -52,7 +50,6 @@ const checkoutCart = completedOrder => {
   return {
     type: CHECKOUT_CART,
     completedOrder
-
   }
 }
 
@@ -72,13 +69,17 @@ export const fetchCart = userId => async dispatch => {
 export const _addToCart = (product, cartId) => async dispatch => {
   try {
     const {price, id, name, picture} = product
-    const res = await axios.post(`/api/orders/${cartId}/add`, {price, id, name, picture})
+    const res = await axios.post(`/api/orders/${cartId}/add`, {
+      price,
+      id,
+      name,
+      picture
+    })
     dispatch(addToCart(res.data))
   } catch (err) {
     console.log(err)
   }
 }
-
 
 export const _updateCart = (quantity, cartId) => async dispatch => {
   try {
@@ -96,7 +97,8 @@ export const _removeItem = cartId => async dispatch => {
     dispatch(removeItem(res.data))
   } catch (error) {
     console.log(error)
-
+  }
+}
 export const _checkoutCart = (
   cartId,
   user,
@@ -112,7 +114,6 @@ export const _checkoutCart = (
     dispatch(checkoutCart(res.data))
   } catch (err) {
     console.error(err)
-
   }
 }
 

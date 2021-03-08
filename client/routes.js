@@ -8,7 +8,7 @@ import {
   UserHome,
   AllProducts,
   SingleProduct,
-  Cart
+  Cart,
   Checkout
 } from './components'
 import {me} from './store'
