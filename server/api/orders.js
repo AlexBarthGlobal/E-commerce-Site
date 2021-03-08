@@ -3,7 +3,7 @@ const {Order, ProductsInCart, Product} = require('../db/models')
 module.exports = router
 
 //update quantity
-router.put('/users/:userId/cart/:cartId/update', async (req, res, next) => {
+router.put('/cart/:cartId/update', async (req, res, next) => {
   const {productId, quantity} = req.body
   const orderId = req.params.cartId
   try {
@@ -23,7 +23,7 @@ router.put('/users/:userId/cart/:cartId/update', async (req, res, next) => {
 })
 
 //delete item from cart
-router.delete('/users/:userId/cart/:cartId/delete', async (req, res, next) => {
+router.delete('/:cartId/delete', async (req, res, next) => {
   const {productId} = req.body
   const orderId = req.params.cartId
   try {
@@ -40,7 +40,7 @@ router.delete('/users/:userId/cart/:cartId/delete', async (req, res, next) => {
 })
 
 //add to cart
-router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
+router.post('/:cartId/add', async (req, res, next) => {
   const {id, price} = req.body
   const orderId = req.params.cartId
   try {
@@ -72,7 +72,7 @@ router.post('/users/:userId/cart/:cartId/add', async (req, res, next) => {
   }
 })
 
-router.get('/users/:userId/cart', async (req, res, next) => {
+router.get('/users/:userId', async (req, res, next) => {
   try {
     const incompleteOrder = await Order.findOrCreate({
       where: {

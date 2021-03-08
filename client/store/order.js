@@ -126,7 +126,18 @@ export default function(state = cartState, action) {
         cartProducts: newCartProducts
       }
     case UPDATE_CART:
-      return action.product
+      // eslint-disable-next-line no-case-declarations
+      const updatedProducts = state.cartProducts.map(prod => {
+        if (prod.productId === action.product.productId) {
+          return action.product
+        }
+        return prod
+      })
+
+      return {
+        ...state,
+        cartProducts: updatedProducts
+      }
     case REMOVE_ITEM:
       return state.cartProducts.filter(
         product => product.productId !== action.product.productId
