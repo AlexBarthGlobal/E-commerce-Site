@@ -26,7 +26,7 @@ router.put('/:cartId/update', async (req, res, next) => {
       }
     })
 
-    res.send(await updatedProduct.update(quantity))
+    res.send(await updatedProduct.update({quantity: quantity}))
   } catch (err) {
     console.log(err)
   }
@@ -34,7 +34,7 @@ router.put('/:cartId/update', async (req, res, next) => {
 
 //delete item from cart
 router.delete('/:cartId/delete', async (req, res, next) => {
-  const {productId} = req.body
+  const productId = req.body.data
   const orderId = req.params.cartId
   try {
     const deletedItem = await ProductsInCart.destroy({
