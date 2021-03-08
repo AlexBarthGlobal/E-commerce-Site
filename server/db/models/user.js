@@ -62,6 +62,10 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
+User.prototype.isAdmin = function(user) {
+  return user.userType === 'ADMIN'
+}
+
 /**
  * classMethods
  */
