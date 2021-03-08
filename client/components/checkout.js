@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {_checkoutCart, fetchCart, me} from '../store'
+import {_checkoutCart, fetchCart, me, _checkoutLocalCart} from '../store'
 
 export class Checkout extends React.Component {
   constructor(props) {
@@ -69,8 +69,12 @@ export class Checkout extends React.Component {
       zipcode: this.state.billingZipcode,
       nameOnCard: this.state.nameOnCard
     }
-    const cartId = this.props.orderInfo.id
-    this.props.checkoutCart(cartId, userInfo, address, payment)
+    if (this.props.user.id) {
+      const cartId = this.props.orderInfo.id
+      this.props.checkoutCart(cartId, userInfo, address, payment)
+    } else {
+      this.props.loggedOutCheckout(userInfo, address, payment)
+    }
   }
 
   render() {
@@ -248,7 +252,9 @@ const mapDispatch = dispatch => {
     fetchCart: userId => dispatch(fetchCart(userId)),
     checkoutCart: (cartId, user, address, payment) =>
       dispatch(_checkoutCart(cartId, user, address, payment)),
-    loadUserData: () => dispatch(me())
+    loadUserData: () => dispatch(me()),
+    loggedOutCheckout: (user, address, payment) =>
+      dispatch(_checkoutLocalCart(user, address, payment))
   }
 }
 

@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
 //still need to add delete item from cart type,creator, and thunk. Might be easier once I have access to the cart page itself in order to make sure the button is operational.
@@ -6,6 +8,7 @@ const cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
 const SET_CART = 'SET_CART'
 const GET_LOCAL_CART = 'GET_LOCAL_CART'
+const CHECKOUT_LOCAL_CART = 'CHECKOUT_LOCAL_CART'
 
 //action creator
 
@@ -20,6 +23,13 @@ const getCart = cart => {
   return {
     type: GET_LOCAL_CART,
     cart
+  }
+}
+
+const checkoutLocalCart = completedOrder => {
+  return {
+    type: CHECKOUT_LOCAL_CART,
+    completedOrder
   }
 }
 
@@ -47,6 +57,26 @@ export const _getCart = () => dispatch => {
   }
 }
 
+export const _checkoutLocalCart = (
+  user,
+  address,
+  payment
+) => async dispatch => {
+  try {
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    console.log('🚀 ~ file: localCart.js ~ line 65 ~ cart', cart)
+    const res = await axios.post(`/api/orders/checkout`, {
+      user,
+      address,
+      payment,
+      cart
+    })
+    dispatch(checkoutLocalCart(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 //reducer
 
 export default function(state = cartState, action) {
@@ -59,6 +89,8 @@ export default function(state = cartState, action) {
       ]
     case GET_LOCAL_CART:
       return action.cart
+    case CHECKOUT_LOCAL_CART:
+      return action.completedOrder
     default:
       return state
   }
