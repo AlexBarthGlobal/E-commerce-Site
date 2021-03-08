@@ -1,9 +1,11 @@
 const router = require('express').Router()
-const {Order, ProductsInCart, Product} = require('../db/models')
+const {Order, ProductsInCart, Payment} = require('../db/models')
 module.exports = router
 
 //update quantity
-router.put('/cart/:cartId/update', async (req, res, next) => {
+
+router.put('/:cartId/update', async (req, res, next) => {
+
   const {productId, quantity} = req.body
   const orderId = req.params.cartId
   try {
@@ -14,9 +16,9 @@ router.put('/cart/:cartId/update', async (req, res, next) => {
       }
     })
 
-    console.log(updatedProduct)
 
     res.send(await updatedProduct.update(quantity))
+
   } catch (err) {
     console.log(err)
   }
@@ -41,7 +43,9 @@ router.delete('/:cartId/delete', async (req, res, next) => {
 
 //add to cart
 router.post('/:cartId/add', async (req, res, next) => {
-  const {id, price} = req.body
+
+  const {id, price, name, picture} = req.body
+
   const orderId = req.params.cartId
   try {
     const addedProduct = await ProductsInCart.findOne({
@@ -62,7 +66,9 @@ router.post('/:cartId/add', async (req, res, next) => {
         orderId: orderId,
         productId: id,
         productPrice: price,
-        quantity: 1
+        quantity: 1,
+        name: name,
+        picture: picture
       })
     }
 
@@ -72,7 +78,29 @@ router.post('/:cartId/add', async (req, res, next) => {
   }
 })
 
-router.get('/users/:userId', async (req, res, next) => {
+
+//checkout a cart
+router.put('/:cartId/checkout', async (req, res, next) => {
+  try {
+    const {address, user, payment} = req.body
+    const paymentMethod = await Payment.create(payment)
+    const currentOrder = await Order.findByPk(req.params.cartId)
+    res.send(
+      await currentOrder.update({
+        status: 'submitted',
+        ...user,
+        ...address,
+        paymentId: paymentMethod.id
+      })
+    )
+  } catch (err) {
+    next(err)
+  }
+})
+
+//search for an incomplete cart and create one if it doesn't exist
+router.get('/users/:userId/', async (req, res, next) => {
+
   try {
     const incompleteOrder = await Order.findOrCreate({
       where: {

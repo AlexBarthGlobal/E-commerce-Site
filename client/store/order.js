@@ -10,8 +10,12 @@ const cartState = {
 
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+
 const UPDATE_CART = 'UPDATE_CART'
 const REMOVE_ITEM = 'REMOVE_ITEM'
+
+const CHECKOUT_CART = 'CHECKOUT_CART'
+
 
 //action creators
 
@@ -30,6 +34,7 @@ const addToCart = product => {
   }
 }
 
+
 const updateCart = product => {
   return {
     type: UPDATE_CART,
@@ -43,12 +48,19 @@ const removeItem = product => {
     product
   }
 }
+const checkoutCart = completedOrder => {
+  return {
+    type: CHECKOUT_CART,
+    completedOrder
+
+  }
+}
 
 //thunks
 
 export const fetchCart = userId => async dispatch => {
   try {
-    const res = await axios.get(`/api/orders/users/${userId}/cart`)
+    const res = await axios.get(`/api/orders/users/${userId}/`)
     const orderInfo = res.data.orderInfo
     const cartProducts = res.data.cartProducts
     dispatch(getCart(orderInfo, cartProducts))
@@ -57,18 +69,16 @@ export const fetchCart = userId => async dispatch => {
   }
 }
 
-export const _addToCart = (product, userId, cartId) => async dispatch => {
+export const _addToCart = (product, cartId) => async dispatch => {
   try {
-    const {price, id} = product
-    const res = await axios.post(
-      `/api/orders/users/${userId}/cart/${cartId}/add`,
-      {price, id}
-    )
+    const {price, id, name, picture} = product
+    const res = await axios.post(`/api/orders/${cartId}/add`, {price, id, name, picture})
     dispatch(addToCart(res.data))
   } catch (err) {
     console.log(err)
   }
 }
+
 
 export const _updateCart = (quantity, cartId) => async dispatch => {
   try {
@@ -86,6 +96,23 @@ export const _removeItem = cartId => async dispatch => {
     dispatch(removeItem(res.data))
   } catch (error) {
     console.log(error)
+
+export const _checkoutCart = (
+  cartId,
+  user,
+  address,
+  payment
+) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/orders/${cartId}/checkout`, {
+      user,
+      address,
+      payment
+    })
+    dispatch(checkoutCart(res.data))
+  } catch (err) {
+    console.error(err)
+
   }
 }
 
@@ -125,6 +152,7 @@ export default function(state = cartState, action) {
         ...state,
         cartProducts: newCartProducts
       }
+
     case UPDATE_CART:
       // eslint-disable-next-line no-case-declarations
       const updatedProducts = state.cartProducts.map(prod => {
@@ -142,6 +170,14 @@ export default function(state = cartState, action) {
       return state.cartProducts.filter(
         product => product.productId !== action.product.productId
       )
+
+    case CHECKOUT_CART:
+      return {
+        ...state,
+        orderInfo: action.completedOrder,
+        cartProducts: []
+      }
+
     default:
       return state
   }

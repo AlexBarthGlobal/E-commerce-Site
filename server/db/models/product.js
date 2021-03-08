@@ -22,7 +22,7 @@ const Product = db.define('product', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  quantity: {
+  stock: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
