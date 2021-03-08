@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const {Product, User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log(req.session)
     const products = await Product.findAll({
       attributes: ['name', 'description', 'picture', 'id', 'price']
     })

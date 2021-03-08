@@ -10,6 +10,10 @@ const cartState = {
 
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+
+const UPDATE_CART = 'UPDATE_CART'
+const REMOVE_ITEM = 'REMOVE_ITEM'
+
 const CHECKOUT_CART = 'CHECKOUT_CART'
 
 //action creators
@@ -29,6 +33,19 @@ const addToCart = product => {
   }
 }
 
+const updateCart = product => {
+  return {
+    type: UPDATE_CART,
+    product
+  }
+}
+
+const removeItem = product => {
+  return {
+    type: REMOVE_ITEM,
+    product
+  }
+}
 const checkoutCart = completedOrder => {
   return {
     type: CHECKOUT_CART,
@@ -64,6 +81,24 @@ export const _addToCart = (product, cartId) => async dispatch => {
   }
 }
 
+export const _updateCart = (quantity, cartId) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/orders/${cartId}/update`, quantity)
+    console.log(res.data)
+    dispatch(updateCart(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const _removeItem = cartId => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/orders/${cartId}/delete`)
+    dispatch(removeItem(res.data))
+  } catch (error) {
+    console.log(error)
+  }
+}
 export const _checkoutCart = (
   cartId,
   user,
@@ -118,12 +153,32 @@ export default function(state = cartState, action) {
         ...state,
         cartProducts: newCartProducts
       }
+
+    case UPDATE_CART:
+      // eslint-disable-next-line no-case-declarations
+      const updatedProducts = state.cartProducts.map(prod => {
+        if (prod.productId === action.product.productId) {
+          return action.product
+        }
+        return prod
+      })
+
+      return {
+        ...state,
+        cartProducts: updatedProducts
+      }
+    case REMOVE_ITEM:
+      return state.cartProducts.filter(
+        product => product.productId !== action.product.productId
+      )
+
     case CHECKOUT_CART:
       return {
         ...state,
         orderInfo: action.completedOrder,
         cartProducts: []
       }
+
     default:
       return state
   }
