@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {_removeItem, _updateCart} from '../store/order'
 
 let flag = {value: 0, productId: null}
 
@@ -36,7 +37,7 @@ export class Cart extends React.Component {
 
     if (event.target.value == 0) {
       // Dispatch DELETE Thunk
-      // this.props.deleteProduct({orderId, productId});
+      this.props.deleteProduct(orderId, productId)
       console.log('item deleted')
     }
 
@@ -46,7 +47,8 @@ export class Cart extends React.Component {
       this.forceUpdate()
     } else {
       // Dispatch UPDATE Thunk
-      // this.props.updateQuantity({orderId, productId, quantitySelected: event.target.value});
+      const newQuantity = parseInt(event.target.value)
+      this.props.updateQuantity(newQuantity, orderId, productId)
     }
   }
 
@@ -66,11 +68,15 @@ export class Cart extends React.Component {
     if (this.state.changed === 1) {
       if (this.state.value == 0) {
         // Dispatch DELETE Thunk
-        // this.props.deleteProduct({orderId, productId});
+        this.props.deleteProduct(productInfo.orderId, productInfo.productId)
         console.log('Item deleted')
       } else {
         // Dispatch UPDATE Thunk
-        // this.props.updateQuantity({orderId: productInfo.orderId, productId: productInfo.productId, quantitySelected: parseInt(this.state.value)});
+        this.props.updateQuantity(
+          parseInt(this.state.value),
+          productInfo.orderId,
+          productInfo.productId
+        )
         console.log('successful order, ')
         console.log(parseInt(this.state.value))
       }
@@ -96,7 +102,7 @@ export class Cart extends React.Component {
 
   deleteProductFunc(orderId, productId) {
     // Dispatch DELETE Thunk
-    // this.props.deleteProduct(orderId, productId);
+    this.props.deleteProduct(orderId, productId)
     console.log(orderId, productId)
     flag.value = 0
     flag.productId = null
@@ -153,6 +159,7 @@ export class Cart extends React.Component {
                   </select>
                 </div>
                 <button
+                  type="button"
                   onClick={() =>
                     this.deleteProductFunc(product.orderId, product.productId)
                   }
@@ -189,6 +196,7 @@ export class Cart extends React.Component {
                   </form>
                 </div>
                 <button
+                  type="button"
                   onClick={() =>
                     this.deleteProductFunc(product.orderId, product.productId)
                   }
@@ -217,8 +225,10 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     //Supposed thunks that have not been created yet.
-    // deleteProduct: (orderId, productId) => dispatch(deleteProductThunk(orderId, productId)),
-    // updateQuantity: (orderId, productId, quantitySelected) => dispatch(updateQuantityThunk(orderId, productId, quantitySelected))
+    deleteProduct: (orderId, productId) =>
+      dispatch(_removeItem(orderId, productId)),
+    updateQuantity: (quantity, orderId, productId) =>
+      dispatch(_updateCart(quantity, orderId, productId))
   }
 }
 

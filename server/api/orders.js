@@ -1,11 +1,21 @@
 const router = require('express').Router()
-const {Order, ProductsInCart, Payment} = require('../db/models')
+const {Order, ProductsInCart, Payment, User} = require('../db/models')
 module.exports = router
+
+//auth middleware
+const isUser = async (req, res, next) => {
+  const order = await Order.findByPk(req.params.cartId)
+  const user = await User.findByPk(order.userId)
+  if (user.id === req.session.passport.user) {
+    next()
+  } else {
+    res.sendStatus(404)
+  }
+}
 
 //update quantity
 
 router.put('/:cartId/update', async (req, res, next) => {
-
   const {productId, quantity} = req.body
   const orderId = req.params.cartId
   try {
@@ -16,9 +26,7 @@ router.put('/:cartId/update', async (req, res, next) => {
       }
     })
 
-
-    res.send(await updatedProduct.update(quantity))
-
+    res.send(await updatedProduct.update({quantity: quantity}))
   } catch (err) {
     console.log(err)
   }
@@ -26,7 +34,7 @@ router.put('/:cartId/update', async (req, res, next) => {
 
 //delete item from cart
 router.delete('/:cartId/delete', async (req, res, next) => {
-  const {productId} = req.body
+  const productId = req.body.data
   const orderId = req.params.cartId
   try {
     const deletedItem = await ProductsInCart.destroy({
@@ -43,7 +51,6 @@ router.delete('/:cartId/delete', async (req, res, next) => {
 
 //add to cart
 router.post('/:cartId/add', async (req, res, next) => {
-
   const {id, price, name, picture} = req.body
 
   const orderId = req.params.cartId
@@ -78,7 +85,6 @@ router.post('/:cartId/add', async (req, res, next) => {
   }
 })
 
-
 //checkout a cart
 router.put('/:cartId/checkout', async (req, res, next) => {
   try {
@@ -100,7 +106,6 @@ router.put('/:cartId/checkout', async (req, res, next) => {
 
 //search for an incomplete cart and create one if it doesn't exist
 router.get('/users/:userId/', async (req, res, next) => {
-
   try {
     const incompleteOrder = await Order.findOrCreate({
       where: {
