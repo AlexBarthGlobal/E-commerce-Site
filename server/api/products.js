@@ -4,6 +4,7 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log(req.session)
     const products = await Product.findAll({
       attributes: ['name', 'description', 'picture', 'id']
     })

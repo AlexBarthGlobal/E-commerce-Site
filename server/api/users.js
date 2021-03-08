@@ -1,10 +1,29 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
 const alert = require('alert')
-const jwt = require('jsonwebtoken')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+async function isAdmin(req, res, next) {
+  const user = await User.findByPk(req.session.passport.user)
+  try {
+    if (user.userType === 'ADMIN') {
+      next()
+    } else {
+      alert('Access Denied!')
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+// export async function isUser(req, res, next) {
+//   const user = await User.findByPk(req.session.passport.user)
+//   try {
+//     if (user.id === req.body.id)
+//   }
+// }
+
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
