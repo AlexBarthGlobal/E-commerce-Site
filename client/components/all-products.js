@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
+import {_getCart} from '../store/localCart'
 
 /**
  * COMPONENT
@@ -10,6 +11,7 @@ import {fetchProducts} from '../store'
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
+    this.props.getLocalCart()
   }
 
   render() {
@@ -20,7 +22,7 @@ export class AllProducts extends React.Component {
           {this.props.allProducts.map(product => {
             return (
               <div className="product-preview" key={product.id}>
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/products/${product.id}`}>
                   <img src={product.picture} />
                   <h3>{product.name}</h3>
                   <p>{product.price}</p>
@@ -46,7 +48,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    getLocalCart: () => dispatch(_getCart())
   }
 }
 

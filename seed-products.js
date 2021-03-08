@@ -4,7 +4,7 @@ const seedProducts = [
     description:
       'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.',
     picture: 'http://dummyimage.com/247x128.jpg/ff4444/ffffff',
-    price: 86.03,
+    price: 8603,
     stock: 83
   },
   {
@@ -12,7 +12,7 @@ const seedProducts = [
     description:
       'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.',
     picture: 'http://dummyimage.com/214x115.png/dddddd/000000',
-    price: 2.4,
+    price: 24,
     stock: 82
   },
   {
@@ -20,7 +20,7 @@ const seedProducts = [
     description:
       'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',
     picture: 'http://dummyimage.com/159x190.png/dddddd/000000',
-    price: 30.59,
+    price: 3059,
     stock: 73
   },
   {
@@ -36,7 +36,7 @@ const seedProducts = [
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
     picture: 'http://dummyimage.com/219x184.jpg/cc0000/ffffff',
-    price: 47.52,
+    price: 4752,
     stock: 69
   },
   {
@@ -52,7 +52,7 @@ const seedProducts = [
     description:
       'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
     picture: 'http://dummyimage.com/134x107.bmp/5fa2dd/ffffff',
-    price: 98.6,
+    price: 986,
     stock: 100
   },
   {
@@ -60,7 +60,7 @@ const seedProducts = [
     description:
       'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.',
     picture: 'http://dummyimage.com/199x160.png/ff4444/ffffff',
-    price: 41.99,
+    price: 4199,
     stock: 30
   },
   {
@@ -68,7 +68,7 @@ const seedProducts = [
     description:
       'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.',
     picture: 'http://dummyimage.com/219x190.jpg/ff4444/ffffff',
-    price: 39.05,
+    price: 3905,
     stock: 66
   },
   {
@@ -76,7 +76,7 @@ const seedProducts = [
     description:
       'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
     picture: 'http://dummyimage.com/163x203.png/ff4444/ffffff',
-    price: 65.84,
+    price: 6584,
     stock: 37
   },
   {
@@ -84,7 +84,7 @@ const seedProducts = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     picture: 'http://dummyimage.com/179x225.png/dddddd/000000',
-    price: 8.01,
+    price: 801,
     stock: 80
   },
   {
@@ -92,7 +92,7 @@ const seedProducts = [
     description:
       'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.',
     picture: 'http://dummyimage.com/133x183.png/5fa2dd/ffffff',
-    price: 64.7,
+    price: 647,
     stock: 95
   },
   {
@@ -100,7 +100,7 @@ const seedProducts = [
     description:
       'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     picture: 'http://dummyimage.com/184x199.png/dddddd/000000',
-    price: 97.57,
+    price: 9757,
     stock: 40
   },
   {
@@ -108,7 +108,7 @@ const seedProducts = [
     description:
       'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     picture: 'http://dummyimage.com/225x207.jpg/ff4444/ffffff',
-    price: 90.49,
+    price: 9049,
     stock: 67
   },
   {
@@ -116,7 +116,7 @@ const seedProducts = [
     description:
       'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
     picture: 'http://dummyimage.com/245x155.bmp/cc0000/ffffff',
-    price: 84.63,
+    price: 8463,
     stock: 78
   },
   {
@@ -124,7 +124,7 @@ const seedProducts = [
     description:
       'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
     picture: 'http://dummyimage.com/141x235.png/ff4444/ffffff',
-    price: 32.75,
+    price: 3275,
     stock: 67
   },
   {
@@ -132,7 +132,7 @@ const seedProducts = [
     description:
       'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
     picture: 'http://dummyimage.com/114x141.bmp/ff4444/ffffff',
-    price: 26.68,
+    price: 2668,
     stock: 71
   },
   {
@@ -140,7 +140,7 @@ const seedProducts = [
     description:
       'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
     picture: 'http://dummyimage.com/211x143.png/5fa2dd/ffffff',
-    price: 64.03,
+    price: 6403,
     stock: 49
   },
   {
@@ -148,7 +148,7 @@ const seedProducts = [
     description:
       'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.',
     picture: 'http://dummyimage.com/175x149.png/dddddd/000000',
-    price: 76.16,
+    price: 7616,
     stock: 44
   },
   {
@@ -156,7 +156,7 @@ const seedProducts = [
     description:
       'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.',
     picture: 'http://dummyimage.com/170x105.jpg/ff4444/ffffff',
-    price: 16.27,
+    price: 1627,
     stock: 100
   },
   {
@@ -164,7 +164,7 @@ const seedProducts = [
     description:
       'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
     picture: 'http://dummyimage.com/196x106.jpg/cc0000/ffffff',
-    price: 95.72,
+    price: 9572,
     stock: 87
   },
   {
@@ -172,7 +172,7 @@ const seedProducts = [
     description:
       'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.',
     picture: 'http://dummyimage.com/211x176.bmp/5fa2dd/ffffff',
-    price: 14.65,
+    price: 1465,
     stock: 84
   },
   {
@@ -180,7 +180,7 @@ const seedProducts = [
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.',
     picture: 'http://dummyimage.com/160x202.bmp/cc0000/ffffff',
-    price: 67.01,
+    price: 6701,
     stock: 56
   },
   {
@@ -188,7 +188,7 @@ const seedProducts = [
     description:
       'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
     picture: 'http://dummyimage.com/188x131.jpg/ff4444/ffffff',
-    price: 27.9,
+    price: 279,
     stock: 62
   },
   {
@@ -196,7 +196,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     picture: 'http://dummyimage.com/156x104.png/ff4444/ffffff',
-    price: 62.8,
+    price: 628,
     stock: 42
   },
   {
@@ -204,7 +204,7 @@ const seedProducts = [
     description:
       'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.',
     picture: 'http://dummyimage.com/238x109.png/5fa2dd/ffffff',
-    price: 68.07,
+    price: 6807,
     stock: 42
   },
   {
@@ -212,7 +212,7 @@ const seedProducts = [
     description:
       'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
     picture: 'http://dummyimage.com/172x221.jpg/cc0000/ffffff',
-    price: 26.6,
+    price: 266,
     stock: 62
   },
   {
@@ -220,14 +220,14 @@ const seedProducts = [
     description:
       'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
     picture: 'http://dummyimage.com/208x193.jpg/ff4444/ffffff',
-    price: 91.35,
+    price: 9135,
     stock: 72
   },
   {
     name: 'Riviera',
     description: 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
     picture: 'http://dummyimage.com/249x173.png/ff4444/ffffff',
-    price: 27.37,
+    price: 2737,
     stock: 56
   },
   {
@@ -235,7 +235,7 @@ const seedProducts = [
     description:
       'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.',
     picture: 'http://dummyimage.com/219x164.jpg/ff4444/ffffff',
-    price: 78.21,
+    price: 7821,
     stock: 58
   },
   {
@@ -243,7 +243,7 @@ const seedProducts = [
     description:
       'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.',
     picture: 'http://dummyimage.com/190x211.jpg/dddddd/000000',
-    price: 35.59,
+    price: 3559,
     stock: 88
   },
   {
@@ -251,7 +251,7 @@ const seedProducts = [
     description:
       'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
     picture: 'http://dummyimage.com/206x100.bmp/dddddd/000000',
-    price: 68.24,
+    price: 6824,
     stock: 26
   },
   {
@@ -259,7 +259,7 @@ const seedProducts = [
     description:
       'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.',
     picture: 'http://dummyimage.com/229x171.jpg/5fa2dd/ffffff',
-    price: 33.03,
+    price: 3303,
     stock: 96
   },
   {
@@ -267,7 +267,7 @@ const seedProducts = [
     description:
       'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.',
     picture: 'http://dummyimage.com/180x121.jpg/cc0000/ffffff',
-    price: 91.29,
+    price: 9129,
     stock: 28
   },
   {
@@ -275,7 +275,7 @@ const seedProducts = [
     description:
       'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     picture: 'http://dummyimage.com/242x188.png/cc0000/ffffff',
-    price: 11.07,
+    price: 1107,
     stock: 35
   },
   {
@@ -283,7 +283,7 @@ const seedProducts = [
     description:
       'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
     picture: 'http://dummyimage.com/122x239.jpg/dddddd/000000',
-    price: 58.56,
+    price: 5856,
     stock: 78
   },
   {
@@ -291,7 +291,7 @@ const seedProducts = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     picture: 'http://dummyimage.com/122x141.bmp/cc0000/ffffff',
-    price: 2.44,
+    price: 244,
     stock: 54
   },
   {
@@ -299,7 +299,7 @@ const seedProducts = [
     description:
       'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     picture: 'http://dummyimage.com/250x110.bmp/dddddd/000000',
-    price: 54.36,
+    price: 5436,
     stock: 68
   },
   {
@@ -307,7 +307,7 @@ const seedProducts = [
     description:
       'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.',
     picture: 'http://dummyimage.com/195x238.jpg/ff4444/ffffff',
-    price: 84.98,
+    price: 8498,
     stock: 77
   },
   {
@@ -315,7 +315,7 @@ const seedProducts = [
     description:
       'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.',
     picture: 'http://dummyimage.com/243x129.jpg/ff4444/ffffff',
-    price: 80.93,
+    price: 8093,
     stock: 87
   },
   {
@@ -323,14 +323,14 @@ const seedProducts = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     picture: 'http://dummyimage.com/157x179.jpg/5fa2dd/ffffff',
-    price: 9.43,
+    price: 943,
     stock: 79
   },
   {
     name: 'Savana 2500',
     description: 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
     picture: 'http://dummyimage.com/142x242.png/cc0000/ffffff',
-    price: 24.88,
+    price: 2488,
     stock: 69
   },
   {
@@ -338,7 +338,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     picture: 'http://dummyimage.com/198x119.png/5fa2dd/ffffff',
-    price: 21.22,
+    price: 2122,
     stock: 39
   },
   {
@@ -346,7 +346,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     picture: 'http://dummyimage.com/127x154.bmp/ff4444/ffffff',
-    price: 16.8,
+    price: 168,
     stock: 47
   },
   {
@@ -354,14 +354,14 @@ const seedProducts = [
     description:
       'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.',
     picture: 'http://dummyimage.com/237x176.png/ff4444/ffffff',
-    price: 63.55,
+    price: 6355,
     stock: 87
   },
   {
     name: 'Truck',
     description: 'Fusce consequat. Nulla nisl. Nunc nisl.',
     picture: 'http://dummyimage.com/179x121.bmp/dddddd/000000',
-    price: 97.37,
+    price: 9737,
     stock: 47
   },
   {
@@ -369,7 +369,7 @@ const seedProducts = [
     description:
       'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.',
     picture: 'http://dummyimage.com/243x243.jpg/cc0000/ffffff',
-    price: 74.5,
+    price: 745,
     stock: 68
   },
   {
@@ -377,7 +377,7 @@ const seedProducts = [
     description:
       'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',
     picture: 'http://dummyimage.com/110x101.png/5fa2dd/ffffff',
-    price: 4.34,
+    price: 434,
     stock: 46
   },
   {
@@ -385,7 +385,7 @@ const seedProducts = [
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
     picture: 'http://dummyimage.com/109x188.bmp/cc0000/ffffff',
-    price: 21.03,
+    price: 2103,
     stock: 13
   },
   {
@@ -393,7 +393,7 @@ const seedProducts = [
     description:
       'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
     picture: 'http://dummyimage.com/106x208.jpg/cc0000/ffffff',
-    price: 23.6,
+    price: 236,
     stock: 26
   },
   {
@@ -401,7 +401,7 @@ const seedProducts = [
     description:
       'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
     picture: 'http://dummyimage.com/188x200.bmp/5fa2dd/ffffff',
-    price: 85.87,
+    price: 8587,
     stock: 64
   },
   {
@@ -409,7 +409,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     picture: 'http://dummyimage.com/180x209.jpg/ff4444/ffffff',
-    price: 1.39,
+    price: 139,
     stock: 61
   },
   {
@@ -417,7 +417,7 @@ const seedProducts = [
     description:
       'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.',
     picture: 'http://dummyimage.com/152x148.jpg/cc0000/ffffff',
-    price: 53.4,
+    price: 534,
     stock: 92
   },
   {
@@ -425,7 +425,7 @@ const seedProducts = [
     description:
       'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.',
     picture: 'http://dummyimage.com/213x182.png/dddddd/000000',
-    price: 69.53,
+    price: 6953,
     stock: 80
   },
   {
@@ -433,7 +433,7 @@ const seedProducts = [
     description:
       'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
     picture: 'http://dummyimage.com/135x133.png/cc0000/ffffff',
-    price: 90.05,
+    price: 9005,
     stock: 50
   },
   {
@@ -441,7 +441,7 @@ const seedProducts = [
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
     picture: 'http://dummyimage.com/233x136.png/cc0000/ffffff',
-    price: 43.87,
+    price: 4387,
     stock: 91
   },
   {
@@ -449,7 +449,7 @@ const seedProducts = [
     description:
       'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.',
     picture: 'http://dummyimage.com/209x199.jpg/cc0000/ffffff',
-    price: 89.0,
+    price: 890,
     stock: 91
   },
   {
@@ -457,7 +457,7 @@ const seedProducts = [
     description:
       'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.',
     picture: 'http://dummyimage.com/160x150.png/5fa2dd/ffffff',
-    price: 30.66,
+    price: 3066,
     stock: 85
   },
   {
@@ -465,14 +465,14 @@ const seedProducts = [
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
     picture: 'http://dummyimage.com/243x175.jpg/ff4444/ffffff',
-    price: 42.9,
+    price: 429,
     stock: 2
   },
   {
     name: 'SVX',
     description: 'Phasellus in felis. Donec semper sapien a libero. Nam dui.',
     picture: 'http://dummyimage.com/205x201.jpg/5fa2dd/ffffff',
-    price: 67.4,
+    price: 674,
     stock: 61
   },
   {
@@ -480,7 +480,7 @@ const seedProducts = [
     description:
       'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.',
     picture: 'http://dummyimage.com/172x202.png/cc0000/ffffff',
-    price: 86.63,
+    price: 8663,
     stock: 49
   },
   {
@@ -488,7 +488,7 @@ const seedProducts = [
     description:
       'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
     picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
-    price: 4.63,
+    price: 463,
     stock: 48
   },
   {
@@ -496,7 +496,7 @@ const seedProducts = [
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
     picture: 'http://dummyimage.com/201x148.bmp/cc0000/ffffff',
-    price: 47.21,
+    price: 4721,
     stock: 62
   },
   {
@@ -504,7 +504,7 @@ const seedProducts = [
     description:
       'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
     picture: 'http://dummyimage.com/118x202.jpg/cc0000/ffffff',
-    price: 58.85,
+    price: 5885,
     stock: 58
   },
   {
@@ -512,14 +512,14 @@ const seedProducts = [
     description:
       'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.',
     picture: 'http://dummyimage.com/195x117.bmp/dddddd/000000',
-    price: 22.75,
+    price: 2275,
     stock: 16
   },
   {
     name: 'Celica',
     description: 'In congue. Etiam justo. Etiam pretium iaculis justo.',
     picture: 'http://dummyimage.com/163x182.bmp/5fa2dd/ffffff',
-    price: 12.73,
+    price: 1273,
     stock: 74
   },
   {
@@ -527,7 +527,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     picture: 'http://dummyimage.com/139x140.jpg/5fa2dd/ffffff',
-    price: 98.21,
+    price: 9821,
     stock: 53
   },
   {
@@ -535,7 +535,7 @@ const seedProducts = [
     description:
       'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.',
     picture: 'http://dummyimage.com/135x139.jpg/ff4444/ffffff',
-    price: 89.46,
+    price: 8946,
     stock: 49
   },
   {
@@ -543,7 +543,7 @@ const seedProducts = [
     description:
       'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     picture: 'http://dummyimage.com/134x138.bmp/5fa2dd/ffffff',
-    price: 50.18,
+    price: 5018,
     stock: 4
   },
   {
@@ -551,7 +551,7 @@ const seedProducts = [
     description:
       'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
     picture: 'http://dummyimage.com/170x135.png/dddddd/000000',
-    price: 9.93,
+    price: 993,
     stock: 34
   },
   {
@@ -559,7 +559,7 @@ const seedProducts = [
     description:
       'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.',
     picture: 'http://dummyimage.com/201x234.bmp/cc0000/ffffff',
-    price: 23.26,
+    price: 2326,
     stock: 42
   },
   {
@@ -567,7 +567,7 @@ const seedProducts = [
     description:
       'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.',
     picture: 'http://dummyimage.com/168x184.jpg/5fa2dd/ffffff',
-    price: 18.49,
+    price: 1849,
     stock: 27
   },
   {
@@ -575,7 +575,7 @@ const seedProducts = [
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
     picture: 'http://dummyimage.com/217x145.bmp/cc0000/ffffff',
-    price: 14.51,
+    price: 1451,
     stock: 18
   },
   {
@@ -583,7 +583,7 @@ const seedProducts = [
     description:
       'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',
     picture: 'http://dummyimage.com/220x120.png/5fa2dd/ffffff',
-    price: 45.29,
+    price: 4529,
     stock: 62
   },
   {
@@ -591,7 +591,7 @@ const seedProducts = [
     description:
       'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.',
     picture: 'http://dummyimage.com/213x177.bmp/5fa2dd/ffffff',
-    price: 76.52,
+    price: 7652,
     stock: 24
   },
   {
@@ -599,7 +599,7 @@ const seedProducts = [
     description:
       'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
     picture: 'http://dummyimage.com/137x221.jpg/ff4444/ffffff',
-    price: 67.4,
+    price: 674,
     stock: 81
   },
   {
@@ -607,7 +607,7 @@ const seedProducts = [
     description:
       'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.',
     picture: 'http://dummyimage.com/227x187.bmp/dddddd/000000',
-    price: 62.15,
+    price: 6215,
     stock: 29
   },
   {
@@ -615,14 +615,14 @@ const seedProducts = [
     description:
       'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.',
     picture: 'http://dummyimage.com/140x231.bmp/ff4444/ffffff',
-    price: 67.61,
+    price: 6761,
     stock: 40
   },
   {
     name: 'FX',
     description: 'Fusce consequat. Nulla nisl. Nunc nisl.',
     picture: 'http://dummyimage.com/167x108.png/cc0000/ffffff',
-    price: 26.36,
+    price: 2636,
     stock: 30
   },
   {
@@ -630,7 +630,7 @@ const seedProducts = [
     description:
       'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     picture: 'http://dummyimage.com/126x147.png/cc0000/ffffff',
-    price: 93.27,
+    price: 9327,
     stock: 37
   },
   {
@@ -638,7 +638,7 @@ const seedProducts = [
     description:
       'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.',
     picture: 'http://dummyimage.com/218x150.jpg/5fa2dd/ffffff',
-    price: 5.94,
+    price: 594,
     stock: 99
   },
   {
@@ -646,7 +646,7 @@ const seedProducts = [
     description:
       'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.',
     picture: 'http://dummyimage.com/124x158.bmp/5fa2dd/ffffff',
-    price: 15.47,
+    price: 1547,
     stock: 15
   },
   {
@@ -654,7 +654,7 @@ const seedProducts = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     picture: 'http://dummyimage.com/117x170.bmp/cc0000/ffffff',
-    price: 88.95,
+    price: 8895,
     stock: 40
   },
   {
@@ -662,14 +662,14 @@ const seedProducts = [
     description:
       'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
     picture: 'http://dummyimage.com/196x106.bmp/cc0000/ffffff',
-    price: 77.4,
+    price: 774,
     stock: 44
   },
   {
     name: 'M6',
     description: 'Phasellus in felis. Donec semper sapien a libero. Nam dui.',
     picture: 'http://dummyimage.com/117x105.bmp/dddddd/000000',
-    price: 86.5,
+    price: 865,
     stock: 8
   },
   {
@@ -677,7 +677,7 @@ const seedProducts = [
     description:
       'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
     picture: 'http://dummyimage.com/160x171.bmp/5fa2dd/ffffff',
-    price: 86.14,
+    price: 8614,
     stock: 3
   },
   {
@@ -685,7 +685,7 @@ const seedProducts = [
     description:
       'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.',
     picture: 'http://dummyimage.com/164x115.jpg/dddddd/000000',
-    price: 61.61,
+    price: 6161,
     stock: 37
   },
   {
@@ -693,7 +693,7 @@ const seedProducts = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     picture: 'http://dummyimage.com/125x107.bmp/ff4444/ffffff',
-    price: 57.6,
+    price: 576,
     stock: 76
   },
   {
@@ -701,7 +701,7 @@ const seedProducts = [
     description:
       'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.',
     picture: 'http://dummyimage.com/119x116.png/ff4444/ffffff',
-    price: 27.52,
+    price: 2752,
     stock: 5
   },
   {
@@ -709,7 +709,7 @@ const seedProducts = [
     description:
       'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
     picture: 'http://dummyimage.com/143x156.png/dddddd/000000',
-    price: 45.65,
+    price: 4565,
     stock: 17
   },
   {
@@ -717,7 +717,7 @@ const seedProducts = [
     description:
       'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
     picture: 'http://dummyimage.com/151x154.bmp/5fa2dd/ffffff',
-    price: 32.18,
+    price: 3218,
     stock: 64
   },
   {
@@ -725,14 +725,14 @@ const seedProducts = [
     description:
       'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.',
     picture: 'http://dummyimage.com/117x176.png/cc0000/ffffff',
-    price: 71.8,
+    price: 718,
     stock: 47
   },
   {
     name: 'Rocky',
     description: 'Phasellus in felis. Donec semper sapien a libero. Nam dui.',
     picture: 'http://dummyimage.com/206x137.bmp/5fa2dd/ffffff',
-    price: 51.6,
+    price: 516,
     stock: 72
   },
   {
@@ -740,7 +740,7 @@ const seedProducts = [
     description:
       'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
     picture: 'http://dummyimage.com/119x160.png/ff4444/ffffff',
-    price: 63.15,
+    price: 6315,
     stock: 74
   },
   {
@@ -748,7 +748,7 @@ const seedProducts = [
     description:
       'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
     picture: 'http://dummyimage.com/123x167.bmp/ff4444/ffffff',
-    price: 7.85,
+    price: 785,
     stock: 42
   },
   {
@@ -756,7 +756,7 @@ const seedProducts = [
     description:
       'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.',
     picture: 'http://dummyimage.com/199x239.bmp/dddddd/000000',
-    price: 10.44,
+    price: 1044,
     stock: 28
   },
   {
@@ -764,7 +764,7 @@ const seedProducts = [
     description:
       'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     picture: 'http://dummyimage.com/160x240.jpg/dddddd/000000',
-    price: 72.3,
+    price: 723,
     stock: 53
   },
   {
@@ -772,7 +772,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',
     picture: 'http://dummyimage.com/147x140.bmp/5fa2dd/ffffff',
-    price: 66.07,
+    price: 6607,
     stock: 62
   },
   {
@@ -780,7 +780,7 @@ const seedProducts = [
     description:
       'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
     picture: 'http://dummyimage.com/196x185.png/ff4444/ffffff',
-    price: 45.08,
+    price: 4508,
     stock: 30
   },
   {
@@ -788,7 +788,7 @@ const seedProducts = [
     description:
       'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',
     picture: 'http://dummyimage.com/167x235.jpg/5fa2dd/ffffff',
-    price: 17.92,
+    price: 1792,
     stock: 61
   }
 ]

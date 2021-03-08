@@ -30,10 +30,13 @@ describe('AllProducts', () => {
     }
   ]
   beforeEach(() => {
-    allProducts = shallow(<AllProducts allProducts={sampleProducts} />)
+    allProducts = shallow(
+      <AllProducts allProducts={sampleProducts} fetchProducts={() => null} />
+    )
+    console.log(allProducts)
   })
 
-  it('renders the email in an h3', () => {
-    expect(allProducts.find('h3').text()).to.be.equal('W201')
+  it('renders product names in an h3', () => {
+    expect(allProducts.find('.product-preview')).to.have.lengthOf(2)
   })
 })
