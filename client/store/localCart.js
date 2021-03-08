@@ -26,7 +26,8 @@ const getCart = cart => {
 
 const removeItem = itemId => {
   return {
-    type: REMOVE_ITEM
+    type: REMOVE_ITEM,
+    itemId
   }
 }
 
