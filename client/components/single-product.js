@@ -6,7 +6,6 @@ import {_setCart, _getCart} from '../store/localCart'
 export class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
-
     this.props.userId
       ? this.props.fetchCart(this.props.userId)
       : this.props.getLocalCart()
@@ -39,7 +38,7 @@ export class SingleProduct extends React.Component {
         </React.Fragment>
       )
     } else {
-      return <h1>LOADING...</h1>
+      return <h1>LOADING......</h1>
     }
   }
 }
