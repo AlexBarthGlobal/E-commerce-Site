@@ -96,6 +96,7 @@ router.put('/:cartId/checkout', async (req, res, next) => {
         status: 'submitted',
         ...user,
         ...address,
+        submittedTime: new Date(),
         paymentId: paymentMethod.id
       })
     )
@@ -108,15 +109,13 @@ router.put('/:cartId/checkout', async (req, res, next) => {
 router.post('/checkout', async (req, res, next) => {
   try {
     const {address, user, payment, cart} = req.body
-    console.log(
-      '🚀 ~ file: orders.js ~ line 111 ~ router.post ~ cartProducts',
-      cart
-    )
+
     const paymentMethod = await Payment.create(payment)
     const newOrder = await Order.create({
       status: 'submitted',
       ...user,
       ...address,
+      submittedTime: new Date(),
       paymentId: paymentMethod.id
     })
     const updatedProducts = cart.map(product => {

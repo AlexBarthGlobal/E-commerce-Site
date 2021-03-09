@@ -154,10 +154,9 @@ export default function(state = cartState, action) {
         cartProducts: action.cartProducts
       }
     case ADD_TO_CART:
-      const newCartProducts = handleAddToCartState(state, action)
       return {
         ...state,
-        cartProducts: newCartProducts
+        cartProducts: handleAddToCartState(state, action)
       }
 
     case UPDATE_CART:
