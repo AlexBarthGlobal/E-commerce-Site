@@ -38,7 +38,7 @@ describe('Product routes', () => {
       const res = await request(app)
         .get('/api/products')
         .expect(200)
-      console.log('HELLO IM THE RESPONSE BODY LOOK AT ME', res.body)
+
       expect(res.body).to.be.an('array')
       expect(res.body.length).to.be.equal(2)
       expect(res.body[0].name).to.be.equal(newProductOne.name)

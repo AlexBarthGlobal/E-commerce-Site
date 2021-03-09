@@ -27,7 +27,7 @@ export class AllProducts extends React.Component {
                 >
                   <img src={product.picture} width="350" height="175" />
                   <h3>{product.name}</h3>
-                  <p>${product.price}</p>
+                  <p>${product.price / 100}</p>
                 </Link>
               </div>
             )
@@ -42,7 +42,6 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     allProducts: state.product.allProducts
   }
