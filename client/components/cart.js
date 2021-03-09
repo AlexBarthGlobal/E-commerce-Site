@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {_removeItem, _updateCart} from '../store/order'
+import {me, fetchCart} from '../store'
 
 let flag = {value: 0, productId: null}
 let formList = {}
@@ -22,7 +23,13 @@ export class Cart extends React.Component {
     this.stateSetter = this.stateSetter.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.loadUserData()
+    if (this.props.user.id) {
+      this.props.fetchCart(this.props.user.id)
+    }
+    console.log('These are the props')
+    console.log(this.props)
     document.addEventListener('keydown', this.escFunction, false)
     console.log('mounted')
     console.log(formList)
@@ -30,6 +37,23 @@ export class Cart extends React.Component {
       this.setState({[key]: formList[key]})
     }
   }
+
+  // //ORIGINAL COMPONENTDIDMOUNT
+  // componentDidMount() {
+  //   // console.log('DO WE HAVE USER ID?:', this.props.user.id)
+  //   if (!this.props.user.id) {
+  //     this.props.loadUserData();
+  //     this.props.fetchCart(this.props.user.id);
+  //   }
+  //   console.log('These are the props')
+  //   console.log(this.props)
+  //   document.addEventListener('keydown', this.escFunction, false)
+  //   console.log('mounted')
+  //   console.log(formList)
+  //   for (let key in formList) {
+  //     this.setState({[key]: formList[key]})
+  //   }
+  // }
 
   updateToSelectedQuantity(orderId, productId) {
     if (event.target.value == 0) {
@@ -213,7 +237,9 @@ export class Cart extends React.Component {
           }
         })}
         <h2>Total: ${calculateTotal()}</h2>
-        <button>Checkout</button>
+        <Link to="/checkout">
+          <button>Checkout</button>
+        </Link>
       </div>
     )
   }
@@ -232,7 +258,9 @@ const mapDispatch = dispatch => {
     deleteProduct: (orderId, productId) =>
       dispatch(_removeItem(orderId, productId)),
     updateQuantity: (quantity, orderId, productId) =>
-      dispatch(_updateCart(quantity, orderId, productId))
+      dispatch(_updateCart(quantity, orderId, productId)),
+    loadUserData: () => dispatch(me()),
+    fetchCart: userId => dispatch(fetchCart(userId))
   }
 }
 
