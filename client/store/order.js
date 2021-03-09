@@ -16,7 +16,17 @@ const REMOVE_ITEM = 'REMOVE_ITEM'
 
 const CHECKOUT_CART = 'CHECKOUT_CART'
 
+const CLEAR_LOGGED_IN_CART = 'CLEAR_LOGGED_IN_CART'
+
 //action creators
+
+const clearLoggedInCart = (emptyCart, emptyOrderInfo) => {
+  return {
+    type: CLEAR_LOGGED_IN_CART,
+    emptyCart,
+    emptyOrderInfo
+  }
+}
 
 const getCart = (orderInfo, cartProducts) => {
   return {
@@ -40,10 +50,10 @@ const updateCart = product => {
   }
 }
 
-const removeItem = product => {
+const removeItem = productId => {
   return {
     type: REMOVE_ITEM,
-    product
+    productId
   }
 }
 const checkoutCart = completedOrder => {
@@ -54,6 +64,10 @@ const checkoutCart = completedOrder => {
 }
 
 //thunks
+
+export const _clearLoggedInCart = () => async dispatch => {
+  dispatch(clearLoggedInCart([], {}))
+}
 
 export const fetchCart = userId => async dispatch => {
   try {
@@ -81,20 +95,26 @@ export const _addToCart = (product, cartId) => async dispatch => {
   }
 }
 
-export const _updateCart = (quantity, cartId) => async dispatch => {
+export const _updateCart = (quantity, cartId, productId) => async dispatch => {
   try {
-    const res = await axios.put(`/api/orders/${cartId}/update`, quantity)
-    console.log(res.data)
+    const res = await axios.put(`/api/orders/${cartId}/update`, {
+      productId: productId,
+      quantity: quantity
+    })
+    // console.log(res.data)
     dispatch(updateCart(res.data))
   } catch (err) {
     console.log(err)
   }
 }
 
-export const _removeItem = cartId => async dispatch => {
+export const _removeItem = (cartId, productId) => async dispatch => {
   try {
-    const res = await axios.delete(`/api/orders/${cartId}/delete`)
-    dispatch(removeItem(res.data))
+    const res = await axios.delete(`/api/orders/${cartId}/delete`, {
+      data: {data: productId}
+    })
+    console.log('removeItem Axios', res)
+    dispatch(removeItem(productId))
   } catch (error) {
     console.log(error)
   }
@@ -168,9 +188,10 @@ export default function(state = cartState, action) {
         cartProducts: updatedProducts
       }
     case REMOVE_ITEM:
-      return state.cartProducts.filter(
-        product => product.productId !== action.product.productId
+      const updatedCart = state.cartProducts.filter(
+        product => product.productId !== action.productId
       )
+      return {...state, cartProducts: updatedCart}
 
     case CHECKOUT_CART:
       return {
@@ -178,6 +199,14 @@ export default function(state = cartState, action) {
         orderInfo: action.completedOrder,
         cartProducts: []
       }
+
+    case CLEAR_LOGGED_IN_CART: {
+      return {
+        ...state,
+        orderInfo: action.emptyOrderInfo,
+        cartProducts: action.emptyCart
+      }
+    }
 
     default:
       return state

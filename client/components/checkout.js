@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {_checkoutCart, fetchCart, me} from '../store'
+import {_checkoutCart, fetchCart, me, _checkoutLocalCart} from '../store'
 
 export class Checkout extends React.Component {
   constructor(props) {
@@ -69,8 +69,12 @@ export class Checkout extends React.Component {
       zipcode: this.state.billingZipcode,
       nameOnCard: this.state.nameOnCard
     }
-    const cartId = this.props.orderInfo.id
-    this.props.checkoutCart(cartId, userInfo, address, payment)
+    if (this.props.user.id) {
+      const cartId = this.props.orderInfo.id
+      this.props.checkoutCart(cartId, userInfo, address, payment)
+    } else {
+      this.props.loggedOutCheckout(userInfo, address, payment)
+    }
   }
 
   render() {
@@ -92,7 +96,7 @@ export class Checkout extends React.Component {
     return (
       <React.Fragment>
         <div id="order-details">
-          <h3>Cart</h3>
+          <h2>Cart</h2>
           {this.props.orderItems ? (
             this.props.orderItems.map(product => {
               return (
@@ -100,132 +104,139 @@ export class Checkout extends React.Component {
                   <p>Product Name: {product.name}</p>
                   <p>Price: ${product.productPrice / 100}</p>
                   <p>Quantity: {product.quantity}</p>
+                  <hr id="break" />
                 </div>
               )
             })
           ) : (
             <p>No products in cart!</p>
           )}
-          <h3>Total Cost</h3>
-          <p>{this.props.orderInfo.totalValue}</p>
+          <div id="product-details">
+            <h3>Total Cost</h3>
+            <p>{this.props.orderInfo.totalValue}</p>
+          </div>
         </div>
         <form onSubmit={this.handleSubmit}>
-          <h3>Recipient Info</h3>
-          <label htmlFor="name">
-            Name:
-            <input
-              name="name"
-              type="text"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor={email}>
-            Email:
-            <input
-              name="email"
-              type="text"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor={phoneNumber}>
-            Phone Number:
-            <input
-              name="phoneNumber"
-              type="text"
-              value={phoneNumber}
-              onChange={this.handleChange}
-            />
-          </label>
-          <div className="address">
-            <h3>Address</h3>
-            <label htmlFor={addressLine1}>
-              Address Line 1:
-              <input
-                name="addressLine1"
-                type="text"
-                value={addressLine1}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={addressLine2}>
-              Address Line 2:
-              <input
-                name="addressLine2"
-                type="text"
-                value={addressLine2}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={city}>
-              City:
-              <input
-                name="city"
-                type="text"
-                value={city}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={email}>
-              State:
-              <input
-                name="state"
-                type="text"
-                value={state}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={zipcode}>
-              Zip Code:
-              <input
-                name="zipcode"
-                type="string"
-                value={zipcode}
-                onChange={this.handleChange}
-              />
-            </label>
+          <div id="checkout">
+            <div id="recipient-info">
+              <h3>Recipient Info</h3>
+              <label htmlFor="name">
+                Name:
+                <input
+                  name="name"
+                  type="text"
+                  value={name}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={email}>
+                Email:
+                <input
+                  name="email"
+                  type="text"
+                  value={email}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={phoneNumber}>
+                Phone Number:
+                <input
+                  name="phoneNumber"
+                  type="text"
+                  value={phoneNumber}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div className="address">
+              <h3>Address</h3>
+              <label htmlFor={addressLine1}>
+                Address Line 1:
+                <input
+                  name="addressLine1"
+                  type="text"
+                  value={addressLine1}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={addressLine2}>
+                Address Line 2:
+                <input
+                  name="addressLine2"
+                  type="text"
+                  value={addressLine2}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={city}>
+                City:
+                <input
+                  name="city"
+                  type="text"
+                  value={city}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={email}>
+                State:
+                <input
+                  name="state"
+                  type="text"
+                  value={state}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={zipcode}>
+                Zip Code:
+                <input
+                  name="zipcode"
+                  type="string"
+                  value={zipcode}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div className="billingInfo">
+              <h3>Payment Details</h3>
+              <label htmlFor={nameOnCard}>
+                Name on Card:
+                <input
+                  name="nameOnCard"
+                  type="text"
+                  value={nameOnCard}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={ccNumber}>
+                Credit Card Number:
+                <input
+                  name="ccNumber"
+                  type="text"
+                  value={ccNumber}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={cvv}>
+                CVV:
+                <input
+                  name="cvv"
+                  type="number"
+                  value={cvv}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor={billingZipcode}>
+                Zip Code:
+                <input
+                  name="billingZipcode"
+                  type="number"
+                  value={billingZipcode}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <input type="submit" value="Submit" id="submit" />
           </div>
-          <div className="billingInfo">
-            <h3>Payment Details</h3>
-            <label htmlFor={nameOnCard}>
-              Name on Card:
-              <input
-                name="nameOnCard"
-                type="text"
-                value={nameOnCard}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={ccNumber}>
-              Credit Card Number:
-              <input
-                name="ccNumber"
-                type="text"
-                value={ccNumber}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={cvv}>
-              CVV:
-              <input
-                name="cvv"
-                type="number"
-                value={cvv}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label htmlFor={billingZipcode}>
-              Zip Code:
-              <input
-                name="billingZipcode"
-                type="number"
-                value={billingZipcode}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <input type="submit" value="Submit" />
         </form>
       </React.Fragment>
     )
@@ -236,10 +247,18 @@ export class Checkout extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
+  let items
+  if (state.user.id) {
+    items = state.order.cartProducts
+  } else {
+    items = state.localCart
+  }
+
   return {
     user: state.user,
     orderInfo: state.order.orderInfo,
-    orderItems: state.order.cartProducts
+    // orderItems: state.order.cartProducts,
+    orderItems: items
   }
 }
 
@@ -248,7 +267,9 @@ const mapDispatch = dispatch => {
     fetchCart: userId => dispatch(fetchCart(userId)),
     checkoutCart: (cartId, user, address, payment) =>
       dispatch(_checkoutCart(cartId, user, address, payment)),
-    loadUserData: () => dispatch(me())
+    loadUserData: () => dispatch(me()),
+    loggedOutCheckout: (user, address, payment) =>
+      dispatch(_checkoutLocalCart(user, address, payment))
   }
 }
 
