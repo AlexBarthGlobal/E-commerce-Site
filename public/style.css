@@ -30,6 +30,11 @@ h2 {
   text-align: center;
 }
 
+h3 {
+  font-size: 15px;
+  font-style: oblique;
+}
+
 .smallerInput {
   width: 28px;
   /* text-align: center; */
@@ -44,9 +49,9 @@ h2 {
 #header {
   display: flex;
   justify-content: flex-start;
-  font-size: 20px;
+  font-size: 60px;
   color: white;
-  margin-left: 17px;
+  margin-left: 7px;
 }
 
 #page-header {
