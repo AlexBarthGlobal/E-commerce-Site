@@ -17,7 +17,7 @@ describe('AllProducts', () => {
       description:
         'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
       picture: 'http://dummyimage.com/173x216.bmp/5fa2dd/ffffff',
-      price: 4.63,
+      price: 463,
       stock: 48
     },
     {
@@ -25,7 +25,7 @@ describe('AllProducts', () => {
       description:
         'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.',
       picture: 'http://dummyimage.com/118x202.jpg/cc0000/ffffff',
-      price: 58.85,
+      price: 5885,
       stock: 58
     }
   ]

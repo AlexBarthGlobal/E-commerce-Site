@@ -31,17 +31,10 @@ export class Cart extends React.Component {
   }
   async componentDidMount() {
     await this.props.loadUserData()
-
-    this.props.user.id
-      ? this.props.fetchCart(this.props.user.id)
-      : this.props.getLocalCart()
-
-  async componentDidMount() {
-    await this.props.loadUserData()
     if (this.props.user.id) {
       this.props.fetchCart(this.props.user.id)
     }
-    document.addEventListener('keydown', this.escFunction, false))
+    document.addEventListener('keydown', this.escFunction, false)
     for (let key in formList) {
       this.setState({[key]: formList[key]})
     }
@@ -125,7 +118,7 @@ export class Cart extends React.Component {
           parseInt(this.state[productInfo])
         )
       }
-    } 
+    }
     flag.value = 0
     flag.productId = null
     this.setState({value: 0, changed: 0})

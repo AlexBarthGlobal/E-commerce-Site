@@ -4,10 +4,17 @@ import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 import {_setCart, _getCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
-  componentDidMount() {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+  }
+
+  async componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
     this.props.userId
-      ? this.props.fetchCart(this.props.userId)
+      ? await this.props.fetchCart(this.props.userId)
       : this.props.getLocalCart()
   }
 
