@@ -247,10 +247,18 @@ export class Checkout extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
+  let items
+  if (state.user.id) {
+    items = state.order.cartProducts
+  } else {
+    items = state.localCart
+  }
+
   return {
     user: state.user,
     orderInfo: state.order.orderInfo,
-    orderItems: state.order.cartProducts
+    // orderItems: state.order.cartProducts,
+    orderItems: items
   }
 }
 

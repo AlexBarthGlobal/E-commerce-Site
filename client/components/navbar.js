@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
+import {_clearLoggedInCart} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navvy">
@@ -60,6 +61,8 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(_clearLoggedInCart())
+      localStorage.clear()
     }
   }
 }
