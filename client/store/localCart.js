@@ -1,15 +1,13 @@
 let cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
-
-//still need to add delete item from cart type,creator, and thunk. Might be easier once I have access to the cart page itself in order to make sure the button is operational.
-
 //action type
 
 const SET_CART = 'SET_CART'
 const GET_LOCAL_CART = 'GET_LOCAL_CART'
-const REMOVE_ITEM = 'REMOVE_ITEM'
+const REMOVE_LOCAL_ITEM = 'REMOVE_LOCAL_ITEM'
 const CLEAR_CART = 'CLEAR_CART'
 const CHECKOUT_LOCAL_CART = 'CHECKOUT_LOCAL_CART'
+const UPDATE_LOCAL_QUANTITY = 'UPDATE_LOCAL_QUANTITY'
 
 //action creator
 
@@ -27,9 +25,9 @@ const getCart = cart => {
   }
 }
 
-const removeItem = itemId => {
+const removeLocalItem = itemId => {
   return {
-    type: REMOVE_ITEM,
+    type: REMOVE_LOCAL_ITEM,
     itemId
   }
 }
@@ -38,6 +36,15 @@ const clearCart = cart => {
   return {
     type: CLEAR_CART,
     cart
+  }
+}
+
+const updateLocalQuantity = cart => {
+  return {
+    type: UPDATE_LOCAL_QUANTITY,
+    cart
+  }
+}
 
 const checkoutLocalCart = completedOrder => {
   return {
@@ -82,15 +89,13 @@ export const _getCart = () => dispatch => {
   }
 }
 
-
-export const _removeItem = itemId => dispatch => {
+export const _removeLocalItem = itemId => dispatch => {
   try {
-    cartState.filter(item => {
-      return item.id !== itemId
-    })
+    cartState = cartState.filter(item => item.id !== itemId)
+
     let localCart = JSON.stringify(cartState)
     localStorage.setItem('cart', localCart)
-    dispatch(removeItem(cartState))
+    dispatch(removeLocalItem(cartState))
   } catch (err) {
     console.log(err)
   }
@@ -101,6 +106,27 @@ export const _clearCart = () => dispatch => {
     localStorage.clear()
     const cart = []
     dispatch(clearCart(cart))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const _updateLocalQuantity = (itemId, quantity) => dispatch => {
+  try {
+    cartState = cartState.map(item => {
+      if (item.id === itemId) {
+        item.quantity = quantity
+      }
+      return item
+    })
+
+    let localCart = JSON.stringify(cartState)
+    localStorage.setItem('cart', localCart)
+    dispatch(updateLocalQuantity(cartState))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 export const _checkoutLocalCart = (
   user,
@@ -129,9 +155,11 @@ export default function(state = cartState, action) {
       return action.item
     case GET_LOCAL_CART:
       return action.cart
-    case REMOVE_ITEM:
+    case REMOVE_LOCAL_ITEM:
       return action.itemId
     case CLEAR_CART:
+      return action.cart
+    case UPDATE_LOCAL_QUANTITY:
       return action.cart
     case CHECKOUT_LOCAL_CART:
       return action.completedOrder
