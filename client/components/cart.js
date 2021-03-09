@@ -4,11 +4,12 @@ import {Link} from 'react-router-dom'
 import {_removeItem, _updateCart} from '../store/order'
 
 let flag = {value: 0, productId: null}
+let formList = {}
 
 export class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {value: 0, changed: 0}
+    this.state = {changed: 0}
 
     this.updateToSelectedQuantity = this.updateToSelectedQuantity.bind(this)
     this.updateToSelectedQuantityFromForm = this.updateToSelectedQuantityFromForm.bind(
@@ -17,24 +18,20 @@ export class Cart extends React.Component {
     this.escFunction = this.escFunction.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.deleteProductFunc = this.deleteProductFunc.bind(this)
+    this.checkIfZero = this.checkIfZero.bind(this)
+    this.stateSetter = this.stateSetter.bind(this)
   }
 
   componentDidMount() {
-    console.log('FROM THE CART')
-    console.log(this.props)
-    console.log('THIS IS THE FLAG')
-    console.log(flag)
     document.addEventListener('keydown', this.escFunction, false)
+    console.log('mounted')
+    console.log(formList)
+    for (let key in formList) {
+      this.setState({[key]: formList[key]})
+    }
   }
 
   updateToSelectedQuantity(orderId, productId) {
-    console.log('Order ID')
-    console.log(orderId)
-    console.log('ProductId')
-    console.log(productId)
-    console.log('Quantity Selected')
-    console.log(event.target.value)
-
     if (event.target.value == 0) {
       // Dispatch DELETE Thunk
       this.props.deleteProduct(orderId, productId)
@@ -47,6 +44,7 @@ export class Cart extends React.Component {
       this.forceUpdate()
     } else {
       // Dispatch UPDATE Thunk
+      this.setState({[productId]: event.target.value})
       const newQuantity = parseInt(event.target.value)
       this.props.updateQuantity(newQuantity, orderId, productId)
     }
@@ -60,25 +58,25 @@ export class Cart extends React.Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value, changed: 1})
+  handleChange(event, productId) {
+    this.setState({[productId]: event.target.value, changed: 1})
   }
 
   updateToSelectedQuantityFromForm(evt, productInfo) {
     if (this.state.changed === 1) {
-      if (this.state.value == 0) {
+      if (this.state[productInfo.productId] == 0) {
         // Dispatch DELETE Thunk
         this.props.deleteProduct(productInfo.orderId, productInfo.productId)
         console.log('Item deleted')
       } else {
         // Dispatch UPDATE Thunk
+        console.log(evt)
         this.props.updateQuantity(
-          parseInt(this.state.value),
+          parseInt(this.state[productInfo.productId]),
           productInfo.orderId,
           productInfo.productId
         )
         console.log('successful order, ')
-        console.log(parseInt(this.state.value))
       }
     } else {
       console.log('nothing changed')
@@ -89,13 +87,6 @@ export class Cart extends React.Component {
     flag.value = 0
     flag.productId = null
     this.setState({value: 0, changed: 0})
-
-    // console.log('Order ID')
-    // console.log(orderId)
-    // console.log('ProductId')
-    // console.log(productId)
-    // console.log('Quantity Selected')
-    // console.log(event.target.value)
     console.log(this.state)
     evt.preventDefault()
   }
@@ -109,11 +100,23 @@ export class Cart extends React.Component {
     this.forceUpdate()
   }
 
+  stateSetter(info) {
+    this.setState(info)
+  }
+
+  checkIfZero(quantity) {
+    if (quantity == 0) {
+      this.forceUpdate()
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.escFunction, false)
   }
 
   render() {
+    console.log('THIS IS THE STATE')
+    console.log(this.state)
     const calculateTotal = () => {
       let total = 0
       this.props.order.map(product => {
@@ -127,6 +130,7 @@ export class Cart extends React.Component {
         <h2>Your Cart</h2>
         {this.props.order.map((product, index) => {
           if (product.quantity < 10 && flag.productId !== product.productId) {
+            formList[product.productId] = product.quantity
             return (
               <div key={index}>
                 <div>
@@ -143,7 +147,7 @@ export class Cart extends React.Component {
                         product.productId
                       )
                     }}
-                    defaultValue={product.quantity}
+                    value={product.quantity}
                   >
                     <option value={0}>0</option>
                     <option value={1}>1</option>
@@ -169,6 +173,7 @@ export class Cart extends React.Component {
               </div>
             )
           } else {
+            formList[product.productId] = product.quantity
             return (
               <div key={index}>
                 <div>
@@ -179,18 +184,18 @@ export class Cart extends React.Component {
                 <div>
                   In cart:
                   <form
-                    onChange={this.handleChange}
-                    onSubmit={e =>
+                    onSubmit={e => {
                       this.updateToSelectedQuantityFromForm(e, {
                         orderId: product.orderId,
                         productId: product.productId
                       })
-                    }
+                    }}
                   >
                     <input
                       name="quantity"
                       className="smallerInput"
-                      defaultValue={product.quantity}
+                      value={this.state[product.productId]} //The quantity of the product
+                      onChange={e => this.handleChange(e, product.productId)}
                     />
                     <button>Update</button>
                   </form>
@@ -224,7 +229,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    //Supposed thunks that have not been created yet.
     deleteProduct: (orderId, productId) =>
       dispatch(_removeItem(orderId, productId)),
     updateQuantity: (quantity, orderId, productId) =>
