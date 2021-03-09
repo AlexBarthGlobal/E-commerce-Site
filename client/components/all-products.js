@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store'
+import {fetchProducts, fetchCart, me} from '../store'
 import {_getCart} from '../store/localCart'
 
 /**
@@ -9,7 +9,7 @@ import {_getCart} from '../store/localCart'
  */
 
 export class AllProducts extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetchProducts()
     this.props.getLocalCart()
   }
@@ -49,7 +49,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    getLocalCart: () => dispatch(_getCart())
+    getLocalCart: () => dispatch(_getCart()),
+    fetchCart: userId => dispatch(fetchCart(userId)),
+    loadUserData: () => dispatch(me())
   }
 }
 

@@ -36,11 +36,12 @@ export class Cart extends React.Component {
       ? this.props.fetchCart(this.props.user.id)
       : this.props.getLocalCart()
 
-    console.log('These are the props')
-    console.log(this.props)
-    document.addEventListener('keydown', this.escFunction, false)
-    console.log('mounted')
-    console.log(formList)
+  async componentDidMount() {
+    await this.props.loadUserData()
+    if (this.props.user.id) {
+      this.props.fetchCart(this.props.user.id)
+    }
+    document.addEventListener('keydown', this.escFunction, false))
     for (let key in formList) {
       this.setState({[key]: formList[key]})
     }
@@ -50,7 +51,6 @@ export class Cart extends React.Component {
     if (event.target.value == 0) {
       // Dispatch DELETE Thunk
       this.props.deleteProduct(orderId, productId)
-      console.log('item deleted')
     }
     if (event.target.value == 10) {
       flag.value = 1
@@ -68,7 +68,6 @@ export class Cart extends React.Component {
     if (event.target.value == 0) {
       // Dispatch DELETE Thunk
       this.props.removeLocalItem(productId)
-      console.log('item deleted')
     }
     if (event.target.value == 10) {
       flag.value = 1
@@ -99,25 +98,18 @@ export class Cart extends React.Component {
       if (this.state[productInfo.productId] == 0) {
         // Dispatch DELETE Thunk
         this.props.deleteProduct(productInfo.orderId, productInfo.productId)
-        console.log('Item deleted')
       } else {
         // Dispatch UPDATE Thunk
-        console.log(evt)
         this.props.updateQuantity(
           parseInt(this.state[productInfo.productId]),
           productInfo.orderId,
           productInfo.productId
         )
-        console.log('successful order, ')
       }
-    } else {
-      console.log('nothing changed')
     }
-    console.log(productInfo)
     flag.value = 0
     flag.productId = null
     this.setState({value: 0, changed: 0})
-    console.log(this.state)
     evt.preventDefault()
   }
 
@@ -126,33 +118,23 @@ export class Cart extends React.Component {
       if (this.state[productInfo] == 0) {
         // Dispatch DELETE Thunk
         this.props.removeLocalItem(productInfo)
-        console.log('Item deleted')
       } else {
         // Dispatch UPDATE Thunk
-        console.log(evt)
-        console.log(productInfo)
         this.props.updateLocalQuantity(
           productInfo,
           parseInt(this.state[productInfo])
         )
-
-        console.log('successful order, ')
       }
-    } else {
-      console.log('nothing changed')
-    }
-    console.log(productInfo)
+    } 
     flag.value = 0
     flag.productId = null
     this.setState({value: 0, changed: 0})
-    console.log(this.state)
     evt.preventDefault()
   }
 
   deleteProductFunc(orderId, productId) {
     // Dispatch DELETE Thunk
     this.props.deleteProduct(orderId, productId)
-    console.log(orderId, productId)
     flag.value = 0
     flag.productId = null
     this.forceUpdate()
@@ -173,8 +155,6 @@ export class Cart extends React.Component {
   }
 
   render() {
-    console.log('THIS IS THE STATE')
-    console.log(this.state)
     const calculateTotal = () => {
       let total = 0
       this.props.user.id
