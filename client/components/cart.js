@@ -132,8 +132,8 @@ export class Cart extends React.Component {
           if (product.quantity < 10 && flag.productId !== product.productId) {
             formList[product.productId] = product.quantity
             return (
-              <div key={index} id="list-wrap">
-                <div className="product-preview">
+              <div key={index}>
+                <div>
                   <img src={product.picture} width="350" height="175" />
                   <p>{product.name}</p>
                   <p>Price: ${product.productPrice * product.quantity}</p>
