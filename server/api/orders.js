@@ -25,7 +25,6 @@ router.put('/:cartId/update', async (req, res, next) => {
         productId: productId
       }
     })
-
     res.send(await updatedProduct.update({quantity: quantity}))
   } catch (err) {
     console.log(err)
@@ -78,7 +77,6 @@ router.post('/:cartId/add', async (req, res, next) => {
         picture: picture
       })
     }
-
     res.json(updatedProduct)
   } catch (err) {
     console.log(err)
