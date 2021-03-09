@@ -5,27 +5,42 @@ import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Pit's Stop</h1>
-    <nav>
-      <NavLink to="/all-products">All Products</NavLink>
-      <NavLink to="/cart">Cart</NavLink>
+  <div className="navvy">
+    <div id="header">
+      <h1>Pit's Stop</h1>
+    </div>
+    <nav id="navbar">
+      <NavLink to="/all-products" id="link">
+        All Products
+      </NavLink>
+      <NavLink to="/cart" id="link">
+        Cart
+      </NavLink>
       {isLoggedIn ? (
-        <div>
+        <div id="navbar">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">My Account</Link>
-          <a href="#" onClick={handleClick}>
+          <Link to="/home" id="link">
+            My Account
+          </Link>
+          <a href="#" onClick={handleClick} id="link">
             Logout
           </a>
         </div>
       ) : (
-        <div>
+        <div id="navbar">
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login" id="link">
+            Login
+          </Link>
+          <Link to="/signup" id="link">
+            Sign Up
+          </Link>
         </div>
       )}
     </nav>
+    <audio autoPlay controls>
+      <source src="music.mp3" type="audio/mp3" />
+    </audio>
     <hr />
   </div>
 )

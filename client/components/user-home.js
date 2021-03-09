@@ -19,7 +19,7 @@ export const UserHome = props => {
   })
 
   return (
-    <div>
+    <div id="page-header">
       <h3>Welcome, {email}</h3>
     </div>
   )

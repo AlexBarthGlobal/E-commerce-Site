@@ -126,7 +126,7 @@ export class Cart extends React.Component {
     }
 
     return (
-      <div>
+      <div id="list">
         <h2>Your Cart</h2>
         {this.props.order.map((product, index) => {
           if (product.quantity < 10 && flag.productId !== product.productId) {
