@@ -167,7 +167,7 @@ export class Cart extends React.Component {
       return total
     }
     return !this.props.user.id ? (
-      <div>
+      <div id="list">
         <h2>Your Cart</h2>
         {this.props.localCart.map((product, index) => {
           if (product.quantity < 10 && flag.productId !== product.id) {
@@ -257,42 +257,42 @@ export class Cart extends React.Component {
             return (
               <div key={index}>
                 <div>
-                  <img src={product.picture} />
-                </div>
-                <div>{product.name}</div>
-                <div>Price: ${product.productPrice * product.quantity}</div>
-                <div>
-                  In cart:
-                  <select
-                    onChange={() => {
-                      this.updateToSelectedQuantity(
-                        product.orderId,
-                        product.productId
-                      )
-                    }}
-                    value={product.quantity}
+                  <img src={product.picture} width="350" height="175" />
+                  <p>{product.name}</p>
+                  <p>Price: ${product.productPrice * product.quantity}</p>
+                  <div>
+                    In cart:
+                    <select
+                      onChange={() => {
+                        this.updateToSelectedQuantity(
+                          product.orderId,
+                          product.productId
+                        )
+                      }}
+                      value={product.quantity}
+                    >
+                      <option value={0}>0</option>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                      <option value={4}>4</option>
+                      <option value={5}>5</option>
+                      <option value={6}>6</option>
+                      <option value={7}>7</option>
+                      <option value={8}>8</option>
+                      <option value={9}>9</option>
+                      <option value={10}>10+</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      this.deleteProductFunc(product.orderId, product.productId)
+                    }
                   >
-                    <option value={0}>0</option>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
-                    <option value={8}>8</option>
-                    <option value={9}>9</option>
-                    <option value={10}>10+</option>
-                  </select>
+                    Delete
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    this.deleteProductFunc(product.orderId, product.productId)
-                  }
-                >
-                  Delete
-                </button>
               </div>
             )
           } else {
@@ -300,7 +300,7 @@ export class Cart extends React.Component {
             return (
               <div key={index}>
                 <div>
-                  <img src={product.picture} />
+                  <img src={product.picture} width="350" height="175" />
                 </div>
                 <div>{product.name}</div>
                 <div>Price: ${product.productPrice * product.quantity}</div>

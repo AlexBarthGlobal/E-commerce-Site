@@ -9,7 +9,7 @@ export const UserHome = props => {
   const {email} = props
   localStorage.clear()
   return (
-    <div>
+    <div id="page-header">
       <h3>Welcome, {email}</h3>
     </div>
   )

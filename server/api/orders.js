@@ -5,8 +5,7 @@ module.exports = router
 //auth middleware
 const isUser = async (req, res, next) => {
   const order = await Order.findByPk(req.params.cartId)
-  const user = await User.findByPk(order.userId)
-  if (user.id === req.session.passport.user) {
+  if (order.userId === req.session.passport.user) {
     next()
   } else {
     res.sendStatus(404)
@@ -15,7 +14,7 @@ const isUser = async (req, res, next) => {
 
 //update quantity
 
-router.put('/:cartId/update', async (req, res, next) => {
+router.put('/:cartId/update', isUser, async (req, res, next) => {
   const {productId, quantity} = req.body
   const orderId = req.params.cartId
   try {
@@ -33,7 +32,7 @@ router.put('/:cartId/update', async (req, res, next) => {
 })
 
 //delete item from cart
-router.delete('/:cartId/delete', async (req, res, next) => {
+router.delete('/:cartId/delete', isUser, async (req, res, next) => {
   const productId = req.body.data
   const orderId = req.params.cartId
   try {
@@ -50,7 +49,7 @@ router.delete('/:cartId/delete', async (req, res, next) => {
 })
 
 //add to cart
-router.post('/:cartId/add', async (req, res, next) => {
+router.post('/:cartId/add', isUser, async (req, res, next) => {
   const {id, price, name, picture} = req.body
 
   const orderId = req.params.cartId
@@ -86,7 +85,7 @@ router.post('/:cartId/add', async (req, res, next) => {
 })
 
 //checkout a cart
-router.put('/:cartId/checkout', async (req, res, next) => {
+router.put('/:cartId/checkout', isUser, async (req, res, next) => {
   try {
     const {address, user, payment} = req.body
     const paymentMethod = await Payment.create(payment)
