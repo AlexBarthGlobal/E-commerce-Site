@@ -92,7 +92,6 @@ export class Checkout extends React.Component {
       billingZipcode,
       nameOnCard
     } = this.state
-
     return (
       <React.Fragment>
         <div id="order-details">

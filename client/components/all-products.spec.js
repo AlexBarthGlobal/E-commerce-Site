@@ -33,7 +33,6 @@ describe('AllProducts', () => {
     allProducts = shallow(
       <AllProducts allProducts={sampleProducts} fetchProducts={() => null} />
     )
-    console.log(allProducts)
   })
 
   it('renders product names in an h3', () => {

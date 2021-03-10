@@ -101,7 +101,6 @@ export const _updateCart = (quantity, cartId, productId) => async dispatch => {
       productId: productId,
       quantity: quantity
     })
-    // console.log(res.data)
     dispatch(updateCart(res.data))
   } catch (err) {
     console.log(err)

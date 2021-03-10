@@ -19,9 +19,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    // console.log(this.props.userId)
     const product = this.props.currentProduct
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
     if (this.props.cart) {
       return (
@@ -31,7 +29,7 @@ export class SingleProduct extends React.Component {
             <div id="description">
               <h2>{product.name}</h2>
               <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
+              <p>Price: ${product.price / 100}</p>
               <button
                 onClick={() =>
                   this.props.userId
