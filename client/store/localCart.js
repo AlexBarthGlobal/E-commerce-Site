@@ -1,4 +1,6 @@
+
 import axios from 'axios'
+
 
 let cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
@@ -13,57 +15,57 @@ const UPDATE_LOCAL_QUANTITY = 'UPDATE_LOCAL_QUANTITY'
 
 //action creator
 
-const setCart = item => {
+const setCart = (item) => {
   return {
     type: SET_CART,
-    item
+    item,
   }
 }
 
-const getCart = cart => {
+const getCart = (cart) => {
   return {
     type: GET_LOCAL_CART,
-    cart
+    cart,
   }
 }
 
-const removeLocalItem = itemId => {
+const removeLocalItem = (itemId) => {
   return {
     type: REMOVE_LOCAL_ITEM,
-    itemId
+    itemId,
   }
 }
 
-const clearCart = cart => {
+const clearCart = (cart) => {
   return {
     type: CLEAR_CART,
-    cart
+    cart,
   }
 }
 
-const updateLocalQuantity = cart => {
+const updateLocalQuantity = (cart) => {
   return {
     type: UPDATE_LOCAL_QUANTITY,
-    cart
+    cart,
   }
 }
 
-const checkoutLocalCart = completedOrder => {
+const checkoutLocalCart = (completedOrder) => {
   return {
     type: CHECKOUT_LOCAL_CART,
-    completedOrder
+    completedOrder,
   }
 }
 
 //thunk
 
 export function _setCart(item) {
-  return dispatch => {
+  return (dispatch) => {
     try {
       if (!item.quantity) item.quantity = 1
 
       let itemExists = false
-      cartState.map(cartItem => {
+      cartState.map((cartItem) => {
         if (cartItem.id === item.id) {
           cartItem.quantity += 1
           itemExists = true
@@ -82,7 +84,7 @@ export function _setCart(item) {
   }
 }
 
-export const _getCart = () => dispatch => {
+export const _getCart = () => (dispatch) => {
   try {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
     dispatch(getCart(cart))
@@ -91,9 +93,9 @@ export const _getCart = () => dispatch => {
   }
 }
 
-export const _removeLocalItem = itemId => dispatch => {
+export const _removeLocalItem = (itemId) => (dispatch) => {
   try {
-    cartState = cartState.filter(item => item.id !== itemId)
+    cartState = cartState.filter((item) => item.id !== itemId)
 
     let localCart = JSON.stringify(cartState)
     localStorage.setItem('cart', localCart)
@@ -103,7 +105,7 @@ export const _removeLocalItem = itemId => dispatch => {
   }
 }
 
-export const _clearCart = () => dispatch => {
+export const _clearCart = () => (dispatch) => {
   try {
     localStorage.clear()
     const cart = []
@@ -113,9 +115,9 @@ export const _clearCart = () => dispatch => {
   }
 }
 
-export const _updateLocalQuantity = (itemId, quantity) => dispatch => {
+export const _updateLocalQuantity = (itemId, quantity) => (dispatch) => {
   try {
-    cartState = cartState.map(item => {
+    cartState = cartState.map((item) => {
       if (item.id === itemId) {
         item.quantity = quantity
       }
@@ -130,18 +132,16 @@ export const _updateLocalQuantity = (itemId, quantity) => dispatch => {
   }
 }
 
-export const _checkoutLocalCart = (
-  user,
-  address,
-  payment
-) => async dispatch => {
+export const _checkoutLocalCart = (user, address, payment) => async (
+  dispatch
+) => {
   try {
     const cart = JSON.parse(localStorage.getItem('cart'))
     const res = await axios.post(`/api/orders/checkout`, {
       user,
       address,
       payment,
-      cart
+      cart,
     })
     dispatch(checkoutLocalCart(res.data))
   } catch (err) {
@@ -151,7 +151,7 @@ export const _checkoutLocalCart = (
 
 //reducer
 
-export default function(state = cartState, action) {
+export default function (state = cartState, action) {
   switch (action.type) {
     case SET_CART:
       return action.item

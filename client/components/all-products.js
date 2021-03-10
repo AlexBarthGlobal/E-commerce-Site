@@ -18,7 +18,7 @@ export class AllProducts extends React.Component {
       <React.Fragment>
         <h2>All Products</h2>
         <div id="list-wrap">
-          {this.props.allProducts.map(product => {
+          {this.props.allProducts.map((product) => {
             return (
               <div className="product-preview" key={product.id}>
                 <Link
@@ -41,18 +41,20 @@ export class AllProducts extends React.Component {
 /**
  * CONTAINER
  */
+
 const mapState = state => {
+
   return {
-    allProducts: state.product.allProducts
+    allProducts: state.product.allProducts,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     getLocalCart: () => dispatch(_getCart()),
-    fetchCart: userId => dispatch(fetchCart(userId)),
-    loadUserData: () => dispatch(me())
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    loadUserData: () => dispatch(me()),
   }
 }
 

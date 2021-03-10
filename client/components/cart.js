@@ -6,7 +6,7 @@ import {me, fetchCart} from '../store'
 import {
   _getCart,
   _removeLocalItem,
-  _updateLocalQuantity
+  _updateLocalQuantity,
 } from '../store/localCart'
 
 let flag = {value: 0, productId: null}
@@ -151,11 +151,13 @@ export class Cart extends React.Component {
     const calculateTotal = () => {
       let total = 0
       this.props.user.id
-        ? this.props.order.map(product => {
-            total += product.productPrice / 100 * product.quantity
+
+        ? this.props.order.map((product) => {
+            total += (product.price / 100) * product.quantity
           })
-        : this.props.localCart.map(product => {
-            total += product.price / 100 * product.quantity
+        : this.props.localCart.map((product) => {
+            total += (product.price / 100) * product.quantity
+
           })
       return total
     }
@@ -171,7 +173,9 @@ export class Cart extends React.Component {
                   <img src={product.picture} />
                 </div>
                 <div>{product.name}</div>
-                <div>Price: ${product.price / 100 * product.quantity}</div>
+
+                <div>Price: ${(product.price / 100) * product.quantity}</div>
+
                 <div>
                   In cart:
                   <select
@@ -213,15 +217,17 @@ export class Cart extends React.Component {
                 <div>
                   In cart:
                   <form
-                    onSubmit={e => {
+                    onSubmit={(e) => {
                       this.updateLocalSelectedQuantityForm(e, product.id)
                     }}
                   >
                     <input
                       name="quantity"
                       className="smallerInput"
+
                       value={this.state[product.id]}
                       onChange={e => this.handleChange(e, product.id)}
+
                     />
                     <button>Update</button>
                   </form>
@@ -252,7 +258,9 @@ export class Cart extends React.Component {
                 <div>
                   <img src={product.picture} width="350" height="175" />
                   <p>{product.name}</p>
-                  <p>Price: ${product.productPrice / 100 * product.quantity}</p>
+
+                  <p>Price: ${(product.price / 100) * product.quantity}</p>
+
                   <div>
                     In cart:
                     <select
@@ -296,24 +304,26 @@ export class Cart extends React.Component {
                   <img src={product.picture} width="350" height="175" />
                 </div>
                 <div>{product.name}</div>
-                <div>
-                  Price: ${product.productPrice / 100 * product.quantity}
-                </div>
+
+                <div>Price: ${(product.price / 100) * product.quantity}</div>
+
                 <div>
                   In cart:
                   <form
-                    onSubmit={e => {
+                    onSubmit={(e) => {
                       this.updateToSelectedQuantityFromForm(e, {
                         orderId: product.orderId,
-                        productId: product.productId
+                        productId: product.productId,
                       })
                     }}
                   >
                     <input
                       name="quantity"
                       className="smallerInput"
+
                       value={this.state[product.productId]}
                       onChange={e => this.handleChange(e, product.productId)}
+
                     />
                     <button>Update</button>
                   </form>
@@ -338,26 +348,26 @@ export class Cart extends React.Component {
     )
   }
 }
-const mapState = state => {
+const mapState = (state) => {
   flag = {value: 0, productId: null}
   return {
     order: state.order.cartProducts,
     user: state.user,
-    localCart: state.localCart
+    localCart: state.localCart,
   }
 }
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     deleteProduct: (orderId, productId) =>
       dispatch(_removeItem(orderId, productId)),
     updateQuantity: (quantity, orderId, productId) =>
       dispatch(_updateCart(quantity, orderId, productId)),
     loadUserData: () => dispatch(me()),
-    fetchCart: userId => dispatch(fetchCart(userId)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
     getLocalCart: () => dispatch(_getCart()),
-    removeLocalItem: itemId => dispatch(_removeLocalItem(itemId)),
+    removeLocalItem: (itemId) => dispatch(_removeLocalItem(itemId)),
     updateLocalQuantity: (itemId, newQuantity) =>
-      dispatch(_updateLocalQuantity(itemId, newQuantity))
+      dispatch(_updateLocalQuantity(itemId, newQuantity)),
   }
 }
 export default connect(mapState, mapDispatch)(Cart)
