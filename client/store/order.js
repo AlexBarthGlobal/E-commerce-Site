@@ -16,7 +16,17 @@ const REMOVE_ITEM = 'REMOVE_ITEM'
 
 const CHECKOUT_CART = 'CHECKOUT_CART'
 
+const CLEAR_LOGGED_IN_CART = 'CLEAR_LOGGED_IN_CART'
+
 //action creators
+
+const clearLoggedInCart = (emptyCart, emptyOrderInfo) => {
+  return {
+    type: CLEAR_LOGGED_IN_CART,
+    emptyCart,
+    emptyOrderInfo
+  }
+}
 
 const getCart = (orderInfo, cartProducts) => {
   return {
@@ -54,6 +64,10 @@ const checkoutCart = completedOrder => {
 }
 
 //thunks
+
+export const _clearLoggedInCart = () => async dispatch => {
+  dispatch(clearLoggedInCart([], {}))
+}
 
 export const fetchCart = userId => async dispatch => {
   try {
@@ -184,6 +198,14 @@ export default function(state = cartState, action) {
         orderInfo: action.completedOrder,
         cartProducts: []
       }
+
+    case CLEAR_LOGGED_IN_CART: {
+      return {
+        ...state,
+        orderInfo: action.emptyOrderInfo,
+        cartProducts: action.emptyCart
+      }
+    }
 
     default:
       return state

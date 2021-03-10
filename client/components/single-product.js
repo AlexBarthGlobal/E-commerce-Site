@@ -4,10 +4,17 @@ import {fetchProductDetails, _addToCart, fetchCart} from '../store'
 import {_setCart, _getCart} from '../store/localCart'
 
 export class SingleProduct extends React.Component {
-  componentDidMount() {
+  constructor() {
+    super()
+    this.state = {
+      cart: []
+    }
+  }
+
+  async componentDidMount() {
     this.props.fetchProductDetails(this.props.match.params.productId)
     this.props.userId
-      ? this.props.fetchCart(this.props.userId)
+      ? await this.props.fetchCart(this.props.userId)
       : this.props.getLocalCart()
   }
 
@@ -19,21 +26,23 @@ export class SingleProduct extends React.Component {
     if (this.props.cart) {
       return (
         <React.Fragment>
-          <img src={product.picture} />
-          <div id="single-product" key={product.id}>
-            <h2>{product.name}</h2>
-            <p>{product.price}</p>
-            <button
-              onClick={() =>
-                this.props.userId
-                  ? this.props.addToCart(product, this.props.cart.id)
-                  : this.props.addToLocalCart(product)
-              }
-              type="submit"
-            >
-              Add To Cart
-            </button>
-            <p>{product.description}</p>
+          <div id="list" key={product.id}>
+            <img src={product.picture} width="400" height="200" />
+            <div id="description">
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+              <button
+                onClick={() =>
+                  this.props.userId
+                    ? this.props.addToCart(product, this.props.cart.id)
+                    : this.props.addToLocalCart(product)
+                }
+                type="submit"
+              >
+                Add To Cart
+              </button>
+            </div>
           </div>
         </React.Fragment>
       )
