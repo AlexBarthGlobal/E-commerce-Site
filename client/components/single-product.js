@@ -19,9 +19,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    // console.log(this.props.userId)
     const product = this.props.currentProduct
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
     if (this.props.cart) {
       return (

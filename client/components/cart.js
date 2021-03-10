@@ -151,11 +151,13 @@ export class Cart extends React.Component {
     const calculateTotal = () => {
       let total = 0
       this.props.user.id
+
         ? this.props.order.map((product) => {
             total += (product.price / 100) * product.quantity
           })
         : this.props.localCart.map((product) => {
             total += (product.price / 100) * product.quantity
+
           })
       return total
     }
@@ -171,7 +173,9 @@ export class Cart extends React.Component {
                   <img src={product.picture} />
                 </div>
                 <div>{product.name}</div>
+
                 <div>Price: ${(product.price / 100) * product.quantity}</div>
+
                 <div>
                   In cart:
                   <select
@@ -209,7 +213,7 @@ export class Cart extends React.Component {
                   <img src={product.picture} />
                 </div>
                 <div>{product.name}</div>
-                <div>Price: ${product.price * product.quantity}</div>
+                <div>Price: ${product.price / 100 * product.quantity}</div>
                 <div>
                   In cart:
                   <form
@@ -220,8 +224,10 @@ export class Cart extends React.Component {
                     <input
                       name="quantity"
                       className="smallerInput"
-                      value={this.state[product.id]} //The quantity of the product
-                      onChange={(e) => this.handleChange(e, product.id)}
+
+                      value={this.state[product.id]}
+                      onChange={e => this.handleChange(e, product.id)}
+
                     />
                     <button>Update</button>
                   </form>
@@ -252,7 +258,9 @@ export class Cart extends React.Component {
                 <div>
                   <img src={product.picture} width="350" height="175" />
                   <p>{product.name}</p>
+
                   <p>Price: ${(product.price / 100) * product.quantity}</p>
+
                   <div>
                     In cart:
                     <select
@@ -296,7 +304,9 @@ export class Cart extends React.Component {
                   <img src={product.picture} width="350" height="175" />
                 </div>
                 <div>{product.name}</div>
+
                 <div>Price: ${(product.price / 100) * product.quantity}</div>
+
                 <div>
                   In cart:
                   <form
@@ -310,8 +320,10 @@ export class Cart extends React.Component {
                     <input
                       name="quantity"
                       className="smallerInput"
-                      value={this.state[product.productId]} //The quantity of the product
-                      onChange={(e) => this.handleChange(e, product.productId)}
+
+                      value={this.state[product.productId]}
+                      onChange={e => this.handleChange(e, product.productId)}
+
                     />
                     <button>Update</button>
                   </form>

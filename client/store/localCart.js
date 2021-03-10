@@ -1,4 +1,6 @@
-const axios = require('axios')
+
+import axios from 'axios'
+
 
 let cartState = JSON.parse(localStorage.getItem('cart') || '[]')
 
@@ -162,7 +164,7 @@ export default function (state = cartState, action) {
     case UPDATE_LOCAL_QUANTITY:
       return action.cart
     case CHECKOUT_LOCAL_CART:
-      return action.completedOrder
+      return []
     default:
       return state
   }
