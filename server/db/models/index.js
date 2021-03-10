@@ -8,58 +8,48 @@ const Sequelize = require('sequelize')
 const ProductsInCart = db.define('ProductsInCart', {
   productPrice: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   picture: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   totalPrice: {
-    type: Sequelize.INTEGER
-  }
+    type: Sequelize.INTEGER,
+  },
 })
 
-ProductsInCart.addHook('afterValidate', (item, options) => {
-  console.log('running validate')
+ProductsInCart.addHook('beforeCreate', async (item, options) => {
   const newTotalPrice = item.quantity * item.productPrice
-  console.log(
-    '🚀 ~ file: index.js ~ line 33 ~ ProductsInCart.addHook ~ quantity',
-    item.quantity
-  )
   item.totalPrice = newTotalPrice
-  console.log(
-    '🚀 ~ file: index.js ~ line 34 ~ ProductsInCart.addHook ~ newTotalPrice',
-    newTotalPrice
-  )
+})
+
+ProductsInCart.addHook('beforeUpdate', async (item, options) => {
+  const newTotalPrice = item.quantity * item.productPrice
+  item.totalPrice = newTotalPrice
 })
 
 ProductsInCart.addHook('afterSave', async (item, options) => {
   const allCartItems = await ProductsInCart.findAll({
-    where: {orderId: item.orderId}
+    where: {orderId: item.orderId},
   })
-
-  console.log('first item', allCartItems[0].totalPrice)
   const totalOrderVal = allCartItems.reduce((acc, singleItem) => {
     return acc + singleItem.totalPrice
   }, 0)
-  console.log(
-    '🚀 ~ file: index.js ~ line 36 ~ ProductsInCart.addHook ~ totalOrderVal',
-    totalOrderVal
-  )
   await Order.update(
     {totalValue: totalOrderVal},
     {
       where: {
-        id: item.orderId
-      }
+        id: item.orderId,
+      },
     }
   )
 })
@@ -91,5 +81,5 @@ module.exports = {
   Product,
   Order,
   ProductsInCart,
-  Payment
+  Payment,
 }
