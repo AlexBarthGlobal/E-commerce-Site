@@ -13,7 +13,7 @@ export class Checkout extends React.Component {
       addressLine2,
       city,
       state,
-      zipcode
+      zipcode,
     } = this.props.user
     this.state = {
       name,
@@ -27,10 +27,11 @@ export class Checkout extends React.Component {
       addressLine2,
       city,
       state,
-      zipcode
+      zipcode,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.calculateCartTotal = this.calculateCartTotal.bind(this)
   }
   async componentDidMount() {
     await this.props.loadUserData()
@@ -45,8 +46,18 @@ export class Checkout extends React.Component {
     const name = target.name
 
     this.setState({
-      [name]: value
+      [name]: value,
     })
+  }
+
+  calculateCartTotal() {
+    let total = 0
+    this.props.user.id
+      ? (total = this.props.orderInfo.totalValue)
+      : this.props.orderItems.map((product) => {
+          total += (product.price / 100) * product.quantity
+        })
+    return total
   }
 
   handleSubmit(event) {
@@ -54,20 +65,20 @@ export class Checkout extends React.Component {
     const userInfo = {
       name: this.state.name,
       email: this.state.email,
-      phoneNumber: this.state.phoneNumber
+      phoneNumber: this.state.phoneNumber,
     }
     const address = {
       addressLine1: this.state.addressLine1,
       addressLine2: this.state.addressLine2,
       city: this.state.city,
       state: this.state.state,
-      zipcode: this.state.zipcode
+      zipcode: this.state.zipcode,
     }
     const payment = {
       ccNumber: this.state.ccNumber,
       cvv: this.state.cvv,
       zipcode: this.state.billingZipcode,
-      nameOnCard: this.state.nameOnCard
+      nameOnCard: this.state.nameOnCard,
     }
     if (this.props.user.id) {
       const cartId = this.props.orderInfo.id
@@ -90,19 +101,18 @@ export class Checkout extends React.Component {
       ccNumber,
       cvv,
       billingZipcode,
-      nameOnCard
+      nameOnCard,
     } = this.state
-
     return (
       <React.Fragment>
         <div id="order-details">
           <h2>Cart</h2>
           {this.props.orderItems ? (
-            this.props.orderItems.map(product => {
+            this.props.orderItems.map((product) => {
               return (
                 <div id="product-details" key={product.id}>
                   <p>Product Name: {product.name}</p>
-                  <p>Price: ${product.productPrice / 100}</p>
+                  <p>Price: ${product.price / 100}</p>
                   <p>Quantity: {product.quantity}</p>
                   <hr id="break" />
                 </div>
@@ -113,7 +123,7 @@ export class Checkout extends React.Component {
           )}
           <div id="product-details">
             <h3>Total Cost</h3>
-            <p>{this.props.orderInfo.totalValue}</p>
+            <p>{this.calculateCartTotal()}</p>
           </div>
         </div>
         <form onSubmit={this.handleSubmit}>
@@ -246,7 +256,7 @@ export class Checkout extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   let items
   if (state.user.id) {
     items = state.order.cartProducts
@@ -257,19 +267,18 @@ const mapState = state => {
   return {
     user: state.user,
     orderInfo: state.order.orderInfo,
-    // orderItems: state.order.cartProducts,
-    orderItems: items
+    orderItems: items,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    fetchCart: userId => dispatch(fetchCart(userId)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
     checkoutCart: (cartId, user, address, payment) =>
       dispatch(_checkoutCart(cartId, user, address, payment)),
     loadUserData: () => dispatch(me()),
     loggedOutCheckout: (user, address, payment) =>
-      dispatch(_checkoutLocalCart(user, address, payment))
+      dispatch(_checkoutLocalCart(user, address, payment)),
   }
 }
 

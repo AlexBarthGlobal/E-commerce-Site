@@ -18,7 +18,7 @@ export class AllProducts extends React.Component {
       <React.Fragment>
         <h2>All Products</h2>
         <div id="list-wrap">
-          {this.props.allProducts.map(product => {
+          {this.props.allProducts.map((product) => {
             return (
               <div className="product-preview" key={product.id}>
                 <Link
@@ -27,7 +27,7 @@ export class AllProducts extends React.Component {
                 >
                   <img src={product.picture} width="350" height="175" />
                   <h3>{product.name}</h3>
-                  <p>${product.price}</p>
+                  <p>${product.price / 100}</p>
                 </Link>
               </div>
             )
@@ -41,19 +41,19 @@ export class AllProducts extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   console.log(state)
   return {
-    allProducts: state.product.allProducts
+    allProducts: state.product.allProducts,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     getLocalCart: () => dispatch(_getCart()),
-    fetchCart: userId => dispatch(fetchCart(userId)),
-    loadUserData: () => dispatch(me())
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    loadUserData: () => dispatch(me()),
   }
 }
 

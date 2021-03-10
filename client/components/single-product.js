@@ -7,7 +7,7 @@ export class SingleProduct extends React.Component {
   constructor() {
     super()
     this.state = {
-      cart: []
+      cart: [],
     }
   }
 
@@ -31,7 +31,7 @@ export class SingleProduct extends React.Component {
             <div id="description">
               <h2>{product.name}</h2>
               <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
+              <p>Price: ${product.price / 100}</p>
               <button
                 onClick={() =>
                   this.props.userId
@@ -55,21 +55,21 @@ export class SingleProduct extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     currentProduct: state.product.currentProduct,
     userId: state.user.id,
-    cart: state.order.orderInfo
+    cart: state.order.orderInfo,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    fetchProductDetails: id => dispatch(fetchProductDetails(id)),
-    fetchCart: userId => dispatch(fetchCart(userId)),
+    fetchProductDetails: (id) => dispatch(fetchProductDetails(id)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
     addToCart: (product, cartId) => dispatch(_addToCart(product, cartId)),
-    addToLocalCart: item => dispatch(_setCart(item)),
-    getLocalCart: () => dispatch(_getCart())
+    addToLocalCart: (item) => dispatch(_setCart(item)),
+    getLocalCart: () => dispatch(_getCart()),
   }
 }
 

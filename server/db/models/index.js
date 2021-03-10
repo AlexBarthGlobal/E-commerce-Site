@@ -6,7 +6,7 @@ const db = require('../db')
 const Sequelize = require('sequelize')
 
 const ProductsInCart = db.define('ProductsInCart', {
-  productPrice: {
+  price: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
@@ -28,12 +28,12 @@ const ProductsInCart = db.define('ProductsInCart', {
 })
 
 ProductsInCart.addHook('beforeCreate', async (item, options) => {
-  const newTotalPrice = item.quantity * item.productPrice
+  const newTotalPrice = item.quantity * item.price
   item.totalPrice = newTotalPrice
 })
 
 ProductsInCart.addHook('beforeUpdate', async (item, options) => {
-  const newTotalPrice = item.quantity * item.productPrice
+  const newTotalPrice = item.quantity * item.price
   item.totalPrice = newTotalPrice
 })
 

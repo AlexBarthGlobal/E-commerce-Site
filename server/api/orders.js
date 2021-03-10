@@ -21,8 +21,8 @@ router.put('/:cartId/update', isUser, async (req, res, next) => {
     const updatedProduct = await ProductsInCart.findOne({
       where: {
         orderId: orderId,
-        productId: productId
-      }
+        productId: productId,
+      },
     })
     res.send(await updatedProduct.update({quantity: quantity}))
   } catch (err) {
@@ -38,8 +38,8 @@ router.delete('/:cartId/delete', isUser, async (req, res, next) => {
     const deletedItem = await ProductsInCart.destroy({
       where: {
         orderId: orderId,
-        productId: productId
-      }
+        productId: productId,
+      },
     })
     res.status(204).json(deletedItem)
   } catch (err) {
@@ -56,24 +56,24 @@ router.post('/:cartId/add', isUser, async (req, res, next) => {
     const addedProduct = await ProductsInCart.findOne({
       where: {
         orderId: orderId,
-        productId: id
-      }
+        productId: id,
+      },
     })
     let updatedProduct
 
     if (addedProduct) {
       updatedProduct = await addedProduct.update({
         quantity: (addedProduct.quantity += 1),
-        productPrice: price
+        price: price,
       })
     } else {
       updatedProduct = await ProductsInCart.create({
         orderId: orderId,
         productId: id,
-        productPrice: price,
+        price: price,
         quantity: 1,
         name: name,
-        picture: picture
+        picture: picture,
       })
     }
     res.json(updatedProduct)
@@ -94,7 +94,7 @@ router.put('/:cartId/checkout', isUser, async (req, res, next) => {
         ...user,
         ...address,
         submittedTime: new Date(),
-        paymentId: paymentMethod.id
+        paymentId: paymentMethod.id,
       })
     )
   } catch (err) {
@@ -113,16 +113,16 @@ router.post('/checkout', async (req, res, next) => {
       ...user,
       ...address,
       submittedTime: new Date(),
-      paymentId: paymentMethod.id
+      paymentId: paymentMethod.id,
     })
-    const updatedProducts = cart.map(product => {
+    const updatedProducts = cart.map((product) => {
       return {
         orderId: newOrder.id,
         productId: product.id,
-        productPrice: product.price,
+        price: product.price,
         quantity: product.quantity,
         name: product.name,
-        picture: product.picture
+        picture: product.picture,
       }
     })
     await ProductsInCart.bulkCreate(updatedProducts)
@@ -138,14 +138,14 @@ router.get('/users/:userId/', async (req, res, next) => {
     const incompleteOrder = await Order.findOrCreate({
       where: {
         status: 'incomplete',
-        userId: req.params.userId
-      }
+        userId: req.params.userId,
+      },
     })
     if (!incompleteOrder[1]) {
       const cartProducts = await ProductsInCart.findAll({
         where: {
-          orderId: incompleteOrder[0].id
-        }
+          orderId: incompleteOrder[0].id,
+        },
       })
       res.json({orderInfo: incompleteOrder[0], cartProducts: cartProducts})
     } else {
