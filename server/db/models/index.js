@@ -11,7 +11,7 @@ const db = require('../db')
  *    BlogPost.belongsTo(User)
  */
 const ProductsInCart = db.define('ProductsInCart', {
-  productPrice: {
+  price: {
     type: Sequelize.INTEGER,
     allowNull: false
   },

@@ -101,7 +101,7 @@ export class Checkout extends React.Component {
               return (
                 <div id="product-details" key={product.id}>
                   <p>Product Name: {product.name}</p>
-                  <p>Price: ${product.productPrice / 100}</p>
+                  <p>Price: ${product.price / 100}</p>
                   <p>Quantity: {product.quantity}</p>
                   <hr id="break" />
                 </div>
@@ -256,7 +256,6 @@ const mapState = state => {
   return {
     user: state.user,
     orderInfo: state.order.orderInfo,
-    // orderItems: state.order.cartProducts,
     orderItems: items
   }
 }
