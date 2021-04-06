@@ -212,7 +212,7 @@ using Boilermaker's handy deployment script:
 
     ***
 
-    **\*** RUN THESE COMMANDS WHEN YOU WANT TO DEPLOY TO HEROKU **\*\***
+    **\*** RUN THESE COMMANDS WHEN YOU WANT TO DEPLOY TO HEROKU **\*\*** Do this after your initial git commit/push
 
     _ `git checkout -b deploy`: checks out a new branch called `deploy`
     _ `npm run start-dev` Then exit out of it. Then type the commands one by one.
