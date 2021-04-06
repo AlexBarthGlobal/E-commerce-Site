@@ -9,12 +9,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navvy">
     <div id="header">
       <NavLink to="/home" id="header">
-        E-Commerce Site
+        Luxury Car Dealership
       </NavLink>
     </div>
     <nav id="navbar">
       <NavLink to="/all-products" id="link">
-        All Products
+        Cars
       </NavLink>
       <NavLink to="/cart" id="link">
         Cart
@@ -41,9 +41,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </div>
       )}
     </nav>
-    <audio autoPlay controls>
-      <source src="music.mp3" type="audio/mp3" />
-    </audio>
     <hr />
   </div>
 )

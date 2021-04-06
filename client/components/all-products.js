@@ -16,7 +16,7 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h2>All Products</h2>
+        <h2>All Cars</h2>
         <div id="list-wrap">
           {this.props.allProducts.map((product) => {
             return (
@@ -42,8 +42,7 @@ export class AllProducts extends React.Component {
  * CONTAINER
  */
 
-const mapState = state => {
-
+const mapState = (state) => {
   return {
     allProducts: state.product.allProducts,
   }
