@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navvy">
     <div id="header">
       <NavLink to="/home" id="header">
-        Pit's Stop
+        E-Commerce Site
       </NavLink>
     </div>
     <nav id="navbar">
@@ -51,19 +51,19 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
       dispatch(_clearLoggedInCart())
       localStorage.clear()
-    }
+    },
   }
 }
 
@@ -74,5 +74,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }
