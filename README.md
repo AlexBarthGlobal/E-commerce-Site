@@ -1,5 +1,4 @@
 # Mock-Car-Dealership
-Fullstack Academy Grace Shopper project: sample e-commerce website
 
 This is a simple mock Car Dealership website built with React, Redux, Express and PostgreSQL.
 
